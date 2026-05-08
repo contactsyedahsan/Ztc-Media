@@ -279,8 +279,53 @@
     .section-title span { color: var(--orange); }
 
     /* ─── LATEST FROM ZTC ────────────────────────────────── */
-    #latest { background: #0d0d0d; }
+    #latest { background: #0d0d0d; overflow: hidden; }
 
+    /* Infinite scroll track */
+    .carousel-outer {
+      overflow: hidden;
+      position: relative;
+      margin: 0 -80px;
+      padding: 16px 0 24px;
+    }
+
+    .carousel-outer::before,
+    .carousel-outer::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .carousel-outer::before {
+      left: 0;
+      background: linear-gradient(to right, #0d0d0d, transparent);
+    }
+
+    .carousel-outer::after {
+      right: 0;
+      background: linear-gradient(to left, #0d0d0d, transparent);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: infiniteScroll 28s linear infinite;
+    }
+
+    .carousel-outer:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes infiniteScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Card */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -289,18 +334,26 @@
 
     .yt-card {
       background: #1a1a1a;
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.35s ease;
       text-decoration: none;
       color: inherit;
       display: block;
+      width: 300px;
+      flex-shrink: 0;
     }
 
+    /* Hover: lift + gentle left-right sway */
     .yt-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+    }
+
+    .yt-card:hover:nth-child(even) {
+      transform: translateY(-8px) rotate(1deg);
     }
 
     .yt-thumb {
@@ -374,6 +427,7 @@
 
     .trending-main .yt-thumb { padding-top: 56.25%; }
 
+    .trending-main { width: auto; flex-shrink: unset; }
     .trending-main .yt-card-body { padding: 20px; }
 
     .trending-main .yt-card-title {
@@ -827,111 +881,157 @@
     <h2 class="section-title">Latest From <span>ZTC</span></h2>
   </div>
 
-  <div class="cards-grid">
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
 
-    <a class="yt-card reveal reveal-delay-1" href="https://youtu.be/wsnusXfK7a4?si=QSMhf4Pg7RvQ00k1" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+      <!-- ── SET 1 ── -->
+      <a class="yt-card" href="https://youtu.be/wsnusXfK7a4?si=QSMhf4Pg7RvQ00k1" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">Real Story</div>
-        <div class="yt-card-title">The Goat Life Movie | The Reality Of Saudi Arabia | Real Story | ZTC</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
-
-    <a class="yt-card reveal reveal-delay-2" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Real Story</div>
+          <div class="yt-card-title">The Goat Life Movie | The Reality Of Saudi Arabia | Real Story | ZTC</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">Pakistan</div>
-        <div class="yt-card-title">Azad Kashmir's Hydropower Projects: Progress or Destruction?</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
+      </a>
 
-    <a class="yt-card reveal reveal-delay-3" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+      <a class="yt-card" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">Parenting</div>
-        <div class="yt-card-title">The Dark Truth About Mobile Phones and Kids 😱 | Must-Watch for Parents</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
-
-    <a class="yt-card reveal reveal-delay-4" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Pakistan</div>
+          <div class="yt-card-title">Azad Kashmir's Hydropower Projects: Progress or Destruction?</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">Politics</div>
-        <div class="yt-card-title">Is Pakistan New Political Map a Game Changer? | Ztc</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
+      </a>
 
-    <a class="yt-card reveal reveal-delay-5" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+      <a class="yt-card" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">History</div>
-        <div class="yt-card-title">Where Did the Idea of Pyramids Come From? | Ztc</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
-
-    <a class="yt-card reveal reveal-delay-6" href="https://youtu.be/ZzVfCcOZe34?si=pJpepdAsn1M3uHSd" target="_blank">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
-        <div class="play-icon">
-          <svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
-            <path d="M27 22l22 12-22 12V22z" fill="white"/>
-          </svg>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Parenting</div>
+          <div class="yt-card-title">The Dark Truth About Mobile Phones and Kids 😱 | Must-Watch for Parents</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
         </div>
-      </div>
-      <div class="yt-card-body">
-        <div class="yt-card-tag">World</div>
-        <div class="yt-card-title">Saudi Arabia's Future Without Oil – What's Next? | ZTC</div>
-        <div class="yt-card-meta"><span>ZTC Media</span></div>
-      </div>
-    </a>
+      </a>
 
-  </div>
+      <a class="yt-card" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Politics</div>
+          <div class="yt-card-title">Is Pakistan New Political Map a Game Changer? | Ztc</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">History</div>
+          <div class="yt-card-title">Where Did the Idea of Pyramids Come From? | Ztc</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/ZzVfCcOZe34?si=pJpepdAsn1M3uHSd" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">World</div>
+          <div class="yt-card-title">Saudi Arabia's Future Without Oil – What's Next? | ZTC</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <!-- ── SET 2 (duplicate for seamless loop) ── -->
+      <a class="yt-card" href="https://youtu.be/wsnusXfK7a4?si=QSMhf4Pg7RvQ00k1" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Real Story</div>
+          <div class="yt-card-title">The Goat Life Movie | The Reality Of Saudi Arabia | Real Story | ZTC</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Pakistan</div>
+          <div class="yt-card-title">Azad Kashmir's Hydropower Projects: Progress or Destruction?</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Parenting</div>
+          <div class="yt-card-title">The Dark Truth About Mobile Phones and Kids 😱 | Must-Watch for Parents</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">Politics</div>
+          <div class="yt-card-title">Is Pakistan New Political Map a Game Changer? | Ztc</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">History</div>
+          <div class="yt-card-title">Where Did the Idea of Pyramids Come From? | Ztc</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+      <a class="yt-card" href="https://youtu.be/ZzVfCcOZe34?si=pJpepdAsn1M3uHSd" target="_blank">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
+          <div class="play-icon"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
+        </div>
+        <div class="yt-card-body">
+          <div class="yt-card-tag">World</div>
+          <div class="yt-card-title">Saudi Arabia's Future Without Oil – What's Next? | ZTC</div>
+          <div class="yt-card-meta"><span>ZTC Media</span></div>
+        </div>
+      </a>
+
+    </div><!-- end carousel-track -->
+  </div><!-- end carousel-outer -->
 </section>
 
 <!-- ═══ TRENDING NOW ═══════════════════════════════════════ -->
