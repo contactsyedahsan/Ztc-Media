@@ -448,7 +448,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      min-height: 600px;
+      min-height: 760px;
       overflow: hidden;
       padding-top: 118px;
       background:
@@ -473,12 +473,12 @@
 
     .slide-content {
       position: absolute;
-      top: 50%;
+      top: 53%;
       left: 50%;
       bottom: auto;
       transform: translate(-50%, -44%);
-      max-width: 780px;
-      width: min(780px, calc(100% - (var(--section-h-pad) * 2)));
+      max-width: 980px;
+      width: min(980px, calc(100% - (var(--section-h-pad) * 2)));
       text-align: center;
       z-index: 2;
     }
@@ -530,6 +530,130 @@
       max-width: 620px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .hero-card-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(150px, 0.72fr) minmax(260px, 1fr) minmax(150px, 0.72fr);
+      align-items: end;
+      gap: clamp(14px, 2vw, 28px);
+      width: min(860px, 100%);
+      margin: 26px auto 0;
+      perspective: 1200px;
+    }
+
+    .hero-media-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        rgba(14,14,14,0.82);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.56), inset 0 1px 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      transform: translateY(24px) scale(0.94);
+      opacity: 0;
+      transition: transform 0.7s var(--ease), opacity 0.7s var(--ease), box-shadow 0.28s, border-color 0.28s;
+    }
+
+    .slide.active .hero-media-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .slide.active .hero-media-card--left { transition-delay: 0.18s; }
+    .slide.active .hero-media-card--center { transition-delay: 0.08s; }
+    .slide.active .hero-media-card--right { transition-delay: 0.26s; }
+
+    .hero-media-card:hover {
+      border-color: rgba(232,135,26,0.42);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.66), 0 0 44px rgba(232,135,26,0.16);
+      transform: translateY(-7px) scale(1.02);
+    }
+
+    .hero-media-card--center {
+      z-index: 2;
+      transform: translateY(26px) scale(0.96);
+    }
+
+    .hero-media-card--left,
+    .hero-media-card--right {
+      margin-bottom: 34px;
+      filter: saturate(0.92) brightness(0.92);
+    }
+
+    .hero-media-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .hero-media-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s var(--ease);
+    }
+
+    .hero-media-card:hover .hero-media-thumb img { transform: scale(1.08); }
+
+    .hero-media-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.05) 56%);
+    }
+
+    .hero-media-play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      color: #fff;
+      opacity: 0.95;
+    }
+
+    .hero-media-play svg {
+      width: 46px;
+      height: 46px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.45));
+    }
+
+    .hero-media-body {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+      z-index: 3;
+      text-align: left;
+    }
+
+    .hero-media-tag {
+      display: inline-flex;
+      margin-bottom: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(232,135,26,0.18);
+      color: var(--brand-orange);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-media-title {
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.28;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+    }
+
+    .hero-media-card--center .hero-media-title {
+      font-size: clamp(0.95rem, 1.2vw, 1.12rem);
     }
 
     .btn-watch {
@@ -1394,14 +1518,32 @@
       .nav-links a { padding: 6px 10px; font-size: 0.68rem; white-space: nowrap; }
       .nav-search { width: 100%; height: 40px; }
       .nav-search input { width: 100%; min-width: 0; }
+      .slider { min-height: 660px; }
+      .slide-title { font-size: clamp(1.72rem, 8vw, 2.55rem); line-height: 1.08; }
+      .slide-desc { display: none; }
+      .btn-watch { padding: 10px 18px; font-size: 0.74rem; }
       .slide-content {
-        top: 52%;
+        top: 55%;
         left: 50%;
         right: auto;
         bottom: auto;
         transform: translate(-50%, -44%);
         width: calc(100% - (var(--section-h-pad) * 2));
         max-width: none;
+      }
+      .hero-card-stage {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        width: min(420px, 100%);
+        margin-top: 18px;
+      }
+      .hero-media-card--left,
+      .hero-media-card--right {
+        display: none;
+      }
+      .hero-media-card--center {
+        margin: 0 auto;
+        width: 100%;
       }
       .slider-dots { left: var(--section-h-pad); bottom: 28px; }
       .series-grid { grid-template-columns: 1fr; }
@@ -1510,6 +1652,38 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         Watch Now
       </a>
+      <div class="hero-card-stage" aria-label="Featured ZTC videos">
+        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">World</div>
+              <div class="hero-media-title">Saudi Arabia's Future Without Oil</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Real Story</div>
+              <div class="hero-media-title">The Goat Life Movie | Reality of Saudi Arabia</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Pakistan</div>
+              <div class="hero-media-title">Azad Kashmir Hydropower Projects</div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -1526,6 +1700,38 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         Watch Now
       </a>
+      <div class="hero-card-stage" aria-label="Featured ZTC videos">
+        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Real Story</div>
+              <div class="hero-media-title">The Goat Life Movie</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">World</div>
+              <div class="hero-media-title">Saudi Arabia's Future Without Oil</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Politics</div>
+              <div class="hero-media-title">Pakistan's New Political Map</div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -1542,6 +1748,38 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         Watch Now
       </a>
+      <div class="hero-card-stage" aria-label="Featured ZTC videos">
+        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Society</div>
+              <div class="hero-media-title">Mobile Phones and Kids</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/ji1wdBQwNGg?si=N3OC72R-UzUN9IDu" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">Featured</div>
+              <div class="hero-media-title">Stories That Change How You See the World</div>
+            </div>
+          </div>
+        </a>
+        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
+          <div class="hero-media-thumb">
+            <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
+            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+            <div class="hero-media-body">
+              <div class="hero-media-tag">History</div>
+              <div class="hero-media-title">Where Did Pyramids Come From?</div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
