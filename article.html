@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Goat Life — ZTC Media</title>
+  <link rel="icon" type="image/png" href="favicon (2).png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       TOKENS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    :root {
+      --brand-red:    #C8151B;
+      --brand-orange: #E8871A;
+
+      --bg-base:      #080808;
+      --bg-surface:   #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-card:      #1c1c1c;
+
+      --text-primary:   #EDE9E3;
+      --text-secondary: rgba(237,233,227,0.65);
+      --text-muted:     rgba(237,233,227,0.40);
+      --text-caption:   rgba(237,233,227,0.50);
+
+      --border-subtle: rgba(255,255,255,0.055);
+      --border-light:  rgba(255,255,255,0.10);
+
+      --accent: var(--brand-orange);
+      --accent-alt: var(--brand-red);
+
+      --font-display: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      --article-max: 720px;
+      --content-max: 1200px;
+      --section-h-pad: 80px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       BASE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NAVBAR
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 var(--section-h-pad);
+      height: 64px;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      justify-self: start;
+    }
+
+    .nav-logo img { height: 34px; width: auto; }
+
+    .nav-brand {
+      font-size: 0.87rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex; gap: 4px; list-style: none;
+      justify-self: center;
+    }
+
+    .nav-links a {
+      color: rgba(237,233,227,0.55);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 3px;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 3px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.22s var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 55%; }
+
+    .nav-right { justify-self: end; display: flex; align-items: center; gap: 10px; }
+
+    /* Reading progress bar */
+    .reading-progress {
+      position: fixed;
+      top: 64px; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(to right, var(--brand-red), var(--brand-orange));
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ARTICLE HERO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-hero {
+      position: relative;
+      width: 100%;
+      height: 72vh;
+      min-height: 500px;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+
+    .article-hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.30);
+    }
+
+    .article-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.2) 50%, transparent 100%);
+    }
+
+    .article-hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      max-width: var(--article-max);
+      margin: 0 auto;
+      padding: 0 24px 52px;
+    }
+
+    .article-series-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .article-series-label {
+      background: var(--brand-red);
+      color: #fff;
+      font-size: 0.70rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    .article-series-name {
+      font-size: 0.70rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .article-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.12;
+      color: #fff;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+    }
+
+    .article-hero-deck {
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.62;
+      font-weight: 300;
+      max-width: 580px;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ARTICLE LAYOUT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr min(var(--article-max), 100%) 1fr;
+      background: var(--bg-base);
+    }
+
+    .article-layout > * {
+      grid-column: 2;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ARTICLE META BAR
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-meta-bar {
+      padding: 28px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 24px;
+      margin-bottom: 44px;
+    }
+
+    .article-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .article-author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .article-author-info { display: flex; flex-direction: column; gap: 2px; }
+
+    .article-author-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .article-meta-details {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .article-meta-details span + span::before {
+      content: ' · ';
+    }
+
+    .article-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .article-share-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: none;
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .article-share-btn:hover { color: var(--text-primary); border-color: var(--border-light); }
+    .article-share-btn svg { width: 13px; height: 13px; }
+
+    .article-read-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ARTICLE BODY — TYPOGRAPHY
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-body {
+      padding: 0 24px;
+    }
+
+    .article-body p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .article-body p.lead {
+      font-size: 1.22rem;
+      color: rgba(237,233,227,0.80);
+      line-height: 1.75;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-top: 52px;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.22rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-top: 40px;
+      margin-bottom: 14px;
+    }
+
+    /* Pull quote */
+    .article-body blockquote {
+      position: relative;
+      margin: 44px 0;
+      padding: 28px 32px;
+      border-left: 3px solid var(--brand-orange);
+      background: rgba(232,135,26,0.04);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .article-body blockquote p {
+      font-family: var(--font-display);
+      font-size: 1.22rem;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.65;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+
+    .article-body blockquote cite {
+      display: block;
+      margin-top: 12px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+    }
+
+    /* Inline image */
+    .article-img {
+      margin: 40px -24px;
+      position: relative;
+    }
+
+    .article-img img {
+      width: 100%;
+      border-radius: 6px;
+      filter: brightness(0.88);
+    }
+
+    .article-img figcaption {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 10px 0 0 2px;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+
+    /* Full-width breakout image */
+    .article-img--full {
+      grid-column: 1 / -1 !important;
+      margin: 48px 0;
+    }
+
+    .article-img--full img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .article-img--full figcaption {
+      max-width: var(--article-max);
+      margin: 10px auto 0;
+      padding: 0 24px;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       VIDEO EMBED
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-video {
+      margin: 44px 0;
+    }
+
+    .article-video-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-red);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .article-video-label::before {
+      content: '';
+      width: 16px; height: 2px;
+      background: var(--brand-red);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .article-video figcaption {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       DATA / KEY FACTS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-keyfacts {
+      margin: 44px 0;
+      padding: 28px;
+      background: var(--bg-elevated);
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .article-keyfacts-label {
+      font-size: 0.70rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .article-keyfacts ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .article-keyfacts li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .article-keyfacts li::before {
+      content: '—';
+      color: var(--brand-orange);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       REFERENCES / SOURCES
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-references {
+      margin: 52px 0 0;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .article-references h4 {
+      font-size: 0.70rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .article-references ol {
+      list-style: none;
+      counter-reset: ref-counter;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .article-references li {
+      counter-increment: ref-counter;
+      display: flex;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .article-references li::before {
+      content: counter(ref-counter) '.';
+      color: var(--brand-orange);
+      font-weight: 700;
+      min-width: 18px;
+      flex-shrink: 0;
+    }
+
+    .article-references li a {
+      color: var(--brand-orange);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ARTICLE FOOTER / TAGS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-tags {
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .article-tag {
+      padding: 5px 14px;
+      border: 1px solid var(--border-light);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .article-tag:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       RELATED CONTENT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .article-related {
+      background: var(--bg-elevated);
+      padding: 64px var(--section-h-pad);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .related-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .related-rule {
+      width: 4px; height: 32px;
+      background: linear-gradient(to bottom, var(--brand-red), var(--brand-orange));
+      border-radius: 2px; flex-shrink: 0;
+    }
+
+    .related-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .related-card {
+      background: var(--bg-card);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s ease, background 0.2s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+      background: #222;
+    }
+
+    .related-thumb {
+      position: relative;
+      width: 100%; padding-top: 56.25%;
+      overflow: hidden; background: #1a1a1a;
+    }
+
+    .related-thumb img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s var(--ease);
+    }
+
+    .related-card:hover .related-thumb img { transform: scale(1.04); }
+
+    .related-body { padding: 14px 16px 18px; }
+
+    .related-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .related-card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.42;
+      color: var(--text-primary);
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FOOTER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px var(--section-h-pad) 24px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo img { height: 30px; }
+
+    .footer-brand-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       RESPONSIVE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    @media (max-width: 900px) {
+      :root { --section-h-pad: 32px; }
+      nav { padding: 0 var(--section-h-pad); grid-template-columns: auto 1fr auto; }
+      .nav-links { display: none; }
+      .article-hero { height: 56vh; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .article-meta-bar { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --section-h-pad: 20px; }
+      .article-hero-title { font-size: 1.7rem; }
+      .article-hero-deck { display: none; }
+      .article-img { margin-left: 0; margin-right: 0; }
+      .article-related { padding: 48px var(--section-h-pad); }
+      .related-grid { grid-template-columns: 1fr; }
+      footer { padding: 28px var(--section-h-pad) 20px; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- ═══ NAVBAR ════════════════════════════════════════════ -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="favicon (2).png" alt="ZTC Media" />
+    <span class="nav-brand">ZTCMEDIA</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#trending">Trending</a></li>
+    <li><a href="index.html#series">Series</a></li>
+    <li><a href="index.html#editorial">Editions</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="index.html" style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(237,233,227,0.45);display:flex;align-items:center;gap:5px;transition:color 0.2s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+      All Stories
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<div class="article-hero">
+  <img class="article-hero-img" src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life" />
+  <div class="article-hero-overlay"></div>
+  <div class="article-hero-content">
+    <div class="article-series-tag">
+      <span class="article-series-label">Real Story</span>
+      <span class="article-series-name">ZTC Investigates</span>
+    </div>
+    <h1 class="article-hero-title">The Goat Life — A Real Story of Survival in the Saudi Arabian Desert</h1>
+    <p class="article-hero-deck">How one man's desperate search for work led him into modern-day slavery in the Gulf — and the systemic failures that allowed it to happen.</p>
+  </div>
+</div>
+
+<!-- ═══ ARTICLE ════════════════════════════════════════════ -->
+<main class="article-layout">
+
+  <!-- Meta bar -->
+  <div class="article-meta-bar">
+    <div class="article-meta-left">
+      <div class="article-author-avatar">Z</div>
+      <div class="article-author-info">
+        <span class="article-author-name">ZTC Investigates</span>
+        <div class="article-meta-details">
+          <span>May 2025</span>
+          <span>Long-form Investigation</span>
+        </div>
+      </div>
+    </div>
+    <div class="article-meta-right">
+      <span class="article-read-time">14 min read</span>
+      <button class="article-share-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+    </div>
+  </div>
+
+  <!-- Key facts -->
+  <div class="article-keyfacts" style="margin: 44px 24px;">
+    <div class="article-keyfacts-label">Key Facts</div>
+    <ul>
+      <li>The kafala (sponsorship) system ties millions of migrant workers to a single employer, stripping them of freedom of movement.</li>
+      <li>Saudi Arabia hosts approximately 13.4 million migrant workers — nearly 40% of the total population.</li>
+      <li>Pakistan is one of the largest sources of Gulf migrant labour, with an estimated 3.2 million workers in the region.</li>
+      <li>Aadu Jeevitham (The Goat Life) is based on the true story of Najeeb Muhammad, a Malayali migrant worker who was enslaved by a Saudi farmer for years.</li>
+    </ul>
+  </div>
+
+  <!-- Body -->
+  <div class="article-body">
+
+    <p class="lead">
+      In the late 1990s, a man boarded a flight from Kerala, India, with a single bag, a work visa, and the hope of sending money home to his family. What followed was years of captivity in the Saudi desert — tending livestock, with no documents, no wages, and no way out. His name was Najeeb Muhammad. His story is not an anomaly.
+    </p>
+
+    <p>
+      ZTC Media's investigation into the conditions of South Asian migrant labour in the Gulf reveals a pattern that has persisted for decades — one enabled by the kafala system, inadequate oversight from home governments, and the economic desperation that drives millions of people to take risks they barely understand.
+    </p>
+
+    <h2>The Promise That Lures Millions</h2>
+
+    <p>
+      For families living in rural Pakistan, Bangladesh, India, and Nepal, a Gulf work visa represents something rare: a path out of poverty that doesn't require a university degree. Recruitment agencies, often working in informal networks, promise skilled and semi-skilled positions — as drivers, construction workers, domestic helpers, or farm labourers. The promised salaries can be transformative for families who survive on less than $5 a day.
+    </p>
+
+    <p>
+      But the contracts workers sign before departure are frequently not the contracts that await them. Many workers arrive to find their role, salary, or employer has changed entirely. Their passports are confiscated — a practice that remains widespread despite being technically illegal in most Gulf states — and they are left with no way to leave.
+    </p>
+
+    <blockquote>
+      <p>"He had come to the desert to build a better life. Instead, the desert swallowed him whole."</p>
+      <cite>— Benyamin, Author of Aadujeevitham</cite>
+    </blockquote>
+
+    <h2>The Kafala System: Architecture of Control</h2>
+
+    <p>
+      The kafala (sponsorship) system is the legal framework that governs migrant labour across most of the Gulf Cooperation Council states, including Saudi Arabia, the UAE, Qatar, Bahrain, Kuwait, and Oman. Under this system, a migrant worker's legal right to reside and work in a Gulf country is tied entirely to a single private sponsor — their employer.
+    </p>
+
+    <p>
+      What this means in practice is stark: the worker cannot change jobs, cannot leave the country, and cannot seek alternative housing without explicit permission from the sponsor. Abuse, wage theft, or dangerous working conditions become impossible to escape without risking deportation or imprisonment — which the employer can initiate at any time.
+    </p>
+
+    <!-- Inline image -->
+    <figure class="article-img">
+      <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life — ZTC Media Investigation" />
+      <figcaption>Stills from the ZTC Media documentary on the Goat Life — examining the conditions faced by migrant workers in rural Saudi Arabia.</figcaption>
+    </figure>
+
+    <h3>Why Reform Has Been Slow</h3>
+
+    <p>
+      Gulf governments have faced sustained international pressure — from the International Labour Organization, from human rights groups, and from the media — to reform or abolish kafala. Qatar's labour reforms ahead of the 2022 World Cup attracted significant attention, with officials announcing an end to the exit permit requirement and a new minimum wage. In practice, implementation has been uneven, and rights groups continue to document widespread violations.
+    </p>
+
+    <p>
+      Saudi Arabia announced its own Vision 2030 reforms, which include pledges to modernize the labour market. Yet workers' advocacy organizations report that the structural power imbalance remains — and that workers who attempt to use the new complaint channels often face retaliation.
+    </p>
+
+    <!-- Video embed -->
+    <div class="article-video">
+      <div class="article-video-label">Watch: ZTC Documentary</div>
+      <figure>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/wsnusXfK7a4"
+            title="The Goat Life Movie — ZTC Media"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <figcaption>The Goat Life — ZTC Media's full documentary investigation into migrant labour in Saudi Arabia. Runtime: 42 minutes.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Najeeb's Story — and the Thousands Like Him</h2>
+
+    <p>
+      The Goat Life is based on the account of Najeeb Muhammad, but it is far from isolated. ZTC Media spoke to community advocates working with returned migrants across Pakistan's Punjab province who described receiving similar accounts regularly — workers who spent years in conditions of forced labour with no ability to contact family or seek help.
+    </p>
+
+    <p>
+      The common thread across nearly every account was the moment of passport confiscation. Once the document was taken, the worker's vulnerability was complete. Without identification, they could not travel, could not report to police, and could not be formally employed elsewhere. Many described being afraid that if they contacted authorities, they would be deported as illegal workers — even though they had arrived legally.
+    </p>
+
+    <blockquote>
+      <p>"They were afraid of the very system that should have protected them. That fear is not accidental — it is by design."</p>
+      <cite>— Human Rights Researcher, source protected</cite>
+    </blockquote>
+
+    <h2>What Meaningful Change Requires</h2>
+
+    <p>
+      Researchers and advocates interviewed by ZTC Media consistently identified several key interventions: the complete abolition of passport confiscation backed by criminal penalties; a shift from employer-tied visas to sector-tied permits that allow workers to change jobs freely; and robust bilateral agreements between sending and receiving countries that establish enforceable minimum standards.
+    </p>
+
+    <p>
+      Pakistan's Overseas Employment Corporation and its equivalents in other sending countries also bear responsibility. Workers are frequently inadequately briefed on their rights, the contracts they sign are not verified against the actual conditions of the role, and there are minimal support mechanisms when things go wrong abroad.
+    </p>
+
+    <p>
+      The story of Najeeb Muhammad is now a film, a book, and a moment of cultural reckoning. But for millions of workers currently in the Gulf under similar conditions, the reckoning is still to come.
+    </p>
+
+    <!-- References -->
+    <div class="article-references">
+      <h4>Sources &amp; References</h4>
+      <ol>
+        <li>International Labour Organization — <em>Migrant Workers in the Arab States: Recommendations for Comprehensive Reform</em>, 2023</li>
+        <li>Human Rights Watch — <em>Kafala: Migrant Workers in the Gulf</em>, 2021</li>
+        <li>Benyamin — <em>Aadujeevitham (The Goat Life)</em>, DC Books, 2008</li>
+        <li>Government of Pakistan, Bureau of Emigration &amp; Overseas Employment — Annual Statistical Report, 2023–24</li>
+        <li>Amnesty International — <em>The Dark Side of Migration</em>, 2022</li>
+        <li>The Guardian — "Qatar's Labour Reforms: What Changed and What Didn't", 2022</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- Tags -->
+  <div class="article-tags">
+    <span class="article-tag">Real Story</span>
+    <span class="article-tag">Saudi Arabia</span>
+    <span class="article-tag">Migrant Labour</span>
+    <span class="article-tag">Kafala System</span>
+    <span class="article-tag">Human Rights</span>
+    <span class="article-tag">ZTC Investigates</span>
+    <span class="article-tag">Pakistan</span>
+    <span class="article-tag">Gulf</span>
+  </div>
+
+</main>
+
+<!-- ═══ RELATED CONTENT ════════════════════════════════════ -->
+<div class="article-related">
+  <div class="related-header">
+    <div class="related-rule"></div>
+    <h2 class="related-title">Continue Reading</h2>
+  </div>
+
+  <div class="related-grid">
+
+    <a class="related-card" href="https://youtu.be/ZzVfCcOZe34" target="_blank">
+      <div class="related-thumb">
+        <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future" />
+      </div>
+      <div class="related-body">
+        <div class="related-tag">World Affairs</div>
+        <div class="related-card-title">Saudi Arabia's Future Without Oil — What Comes Next for the Kingdom?</div>
+      </div>
+    </a>
+
+    <a class="related-card" href="https://youtu.be/wFS-RFNDZ0c" target="_blank">
+      <div class="related-thumb">
+        <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir" />
+      </div>
+      <div class="related-body">
+        <div class="related-tag">Pakistan</div>
+        <div class="related-card-title">Azad Kashmir's Hydropower Projects: Progress or Environmental Destruction?</div>
+      </div>
+    </a>
+
+    <a class="related-card" href="https://youtu.be/tvlYzyeY6D0" target="_blank">
+      <div class="related-thumb">
+        <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones" />
+      </div>
+      <div class="related-body">
+        <div class="related-tag">Society</div>
+        <div class="related-card-title">The Dark Truth About Mobile Phones and Children — What Every Parent Must Know</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="favicon (2).png" alt="ZTC Media" />
+      <span class="footer-brand-name">ZTCMEDIA</span>
+    </div>
+    <p class="footer-copy">&copy; 2025 ZTC Media. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
+<script>
+  /* Reading progress */
+  const progress = document.getElementById('readingProgress');
+  const main = document.querySelector('main');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const articleTop = main ? main.offsetTop : 0;
+    const articleHeight = document.body.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, (scrolled / articleHeight) * 100);
+    progress.style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>
