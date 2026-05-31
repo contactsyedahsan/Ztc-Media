@@ -457,7 +457,7 @@
 
     .hero-carousel {
       position: absolute;
-      top: 50%;
+      top: 28%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
@@ -489,11 +489,11 @@
       box-shadow: 0 30px 86px rgba(0,0,0,0.66), 0 0 44px rgba(232,135,26,0.16);
     }
 
-    .hc-card.hc-center    { width: 680px; height: 383px; transform: translateX(0) scale(1);      opacity: 1;    z-index: 5; filter: brightness(1) saturate(1); box-shadow: 0 40px 120px rgba(0,0,0,0.72), 0 0 60px rgba(232,135,26,0.20); }
-    .hc-card.hc-left      { width: 260px; height: 146px; transform: translateX(-380px) scale(1);  opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
-    .hc-card.hc-right     { width: 260px; height: 146px; transform: translateX(380px) scale(1);   opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
-    .hc-card.hc-far-left  { width: 160px; height: 90px;  transform: translateX(-580px) scale(1);  opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
-    .hc-card.hc-far-right { width: 160px; height: 90px;  transform: translateX(580px) scale(1);   opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
+    .hc-card.hc-center    { width: 820px; height: 461px; transform: translateX(0) scale(1);      opacity: 1;    z-index: 5; filter: brightness(1) saturate(1); box-shadow: 0 40px 120px rgba(0,0,0,0.72), 0 0 60px rgba(232,135,26,0.20); }
+    .hc-card.hc-left      { width: 280px; height: 158px; transform: translateX(-420px) scale(1);  opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
+    .hc-card.hc-right     { width: 280px; height: 158px; transform: translateX(420px) scale(1);   opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
+    .hc-card.hc-far-left  { width: 180px; height: 101px;  transform: translateX(-640px) scale(1);  opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
+    .hc-card.hc-far-right { width: 180px; height: 101px;  transform: translateX(640px) scale(1);   opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
     .hc-card.hc-hidden    { opacity: 0; pointer-events: none; z-index: 1; }
 
     .hc-thumb {
@@ -533,6 +533,32 @@
       height: 46px;
       filter: drop-shadow(0 8px 20px rgba(0,0,0,0.45));
     }
+
+    .hc-category-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, rgba(200,21,27,0.92), rgba(232,135,26,0.92));
+      color: #fff;
+      font-size: 0.70rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      z-index: 4;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.48);
+    }
+
+    .hc-card.hc-center .hc-category-badge { display: flex; }
+    .hc-card.hc-left .hc-category-badge,
+    .hc-card.hc-right .hc-category-badge,
+    .hc-card.hc-far-left .hc-category-badge,
+    .hc-card.hc-far-right .hc-category-badge { display: none; }
 
     .hc-body {
       position: absolute;
@@ -576,10 +602,10 @@
 
     .hero-info {
       position: absolute;
-      top: calc(50% + 200px);
+      top: calc(28% + 240px);
       left: 50%;
       transform: translateX(-50%);
-      width: min(680px, calc(100% - (var(--section-h-pad) * 2)));
+      width: min(720px, calc(100% - (var(--section-h-pad) * 2)));
       text-align: center;
       z-index: 2;
       opacity: 0;
@@ -598,8 +624,11 @@
     }
 
     .hero-info-tag {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       align-self: center;
+      padding: 6px 14px;
       background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
       color: #fff;
       font-size: var(--text-xs);
@@ -636,6 +665,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      width: fit-content;
+      min-width: auto;
       background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
       color: #fff;
       padding: 12px 22px;
@@ -649,7 +680,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
-      margin-top: 14px;
+      margin: 14px auto 0;
     }
 
     .hero-info-cta:hover {
@@ -1500,14 +1531,14 @@
       .nav-search { width: 180px; height: 36px; }
       .auth-btn { width: 36px; height: 36px; }
       .nav-search input { width: 100%; min-width: 0; }
-      .slider { min-height: 780px; padding-top: 65px; }
+      .slider { min-height: 840px; padding-top: 65px; }
       .hero-carousel { transform: translate(-50%, -50%); }
-      .hc-card.hc-center { width: min(100%, 420px); height: 236px; }
+      .hc-card.hc-center { width: min(100%, 480px); height: 270px; }
       .hc-card.hc-left,
       .hc-card.hc-right { width: 120px; height: 67px; transform: translateX(0) scale(1) !important; opacity: 0; }
       .hc-card.hc-far-left,
       .hc-card.hc-far-right { display: none; }
-      .hero-info { top: calc(50% + 130px); width: calc(100% - (var(--section-h-pad) * 2)); }
+      .hero-info { top: calc(28% + 200px); width: calc(100% - (var(--section-h-pad) * 2)); }
       .hero-info-title { font-size: clamp(1.4rem, 5vw, 1.8rem); }
       .hero-info-desc { font-size: 0.9rem; }
       .slider-dots { left: var(--section-h-pad); bottom: 28px; }
@@ -1609,6 +1640,7 @@
       <div class="hc-thumb">
         <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
         <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+        <div class="hc-category-badge">Real Story</div>
       </div>
       <div class="hc-body">
         <div class="hc-tag">Real Story</div>
@@ -1620,6 +1652,7 @@
       <div class="hc-thumb">
         <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
         <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+        <div class="hc-category-badge">World</div>
       </div>
       <div class="hc-body">
         <div class="hc-tag">World</div>
@@ -1631,6 +1664,7 @@
       <div class="hc-thumb">
         <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
         <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+        <div class="hc-category-badge">Pakistan</div>
       </div>
       <div class="hc-body">
         <div class="hc-tag">Pakistan</div>
@@ -1642,6 +1676,7 @@
       <div class="hc-thumb">
         <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
         <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+        <div class="hc-category-badge">Politics</div>
       </div>
       <div class="hc-body">
         <div class="hc-tag">Politics</div>
@@ -1653,6 +1688,7 @@
       <div class="hc-thumb">
         <img src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
         <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+        <div class="hc-category-badge">Featured</div>
       </div>
       <div class="hc-body">
         <div class="hc-tag">Featured</div>
