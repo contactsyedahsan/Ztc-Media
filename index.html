@@ -273,19 +273,21 @@
       justify-self: end;
       align-self: center;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
     }
 
     .auth-wrap {
       position: relative;
+      display: flex;
+      align-items: center;
     }
 
     .nav-search {
       display: flex;
       align-items: center;
-      width: 260px;
+      width: 240px;
       height: 42px;
       background: rgba(255,255,255,0.055);
       border: 1px solid rgba(232,135,26,0.20);
@@ -324,10 +326,10 @@
     .auth-wrap { position: relative; }
 
     .auth-btn {
-      width: 36px; height: 36px;
+      width: 42px; height: 42px;
       border-radius: 50%;
-      border: 1px solid var(--border-light);
-      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.055);
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: border-color 0.22s, background 0.22s;
@@ -1671,10 +1673,11 @@
     @media (max-width: 768px) {
       :root { --section-h-pad: 24px; }
       section { padding: 56px var(--section-h-pad); }
-      nav { padding: 0 var(--section-h-pad); grid-template-columns: auto 1fr auto; grid-template-rows: 75px; height: 75px; }
+      nav { padding: 0 var(--section-h-pad); grid-template-columns: auto 1fr auto; grid-template-rows: 65px; height: 65px; }
       .nav-links { overflow-x: auto; max-width: 100%; justify-self: stretch; }
       .nav-links a { padding: 6px 10px; font-size: 0.68rem; white-space: nowrap; }
-      .nav-search { width: 200px; height: 38px; }
+      .nav-search { width: 180px; height: 36px; }
+      .auth-btn { width: 36px; height: 36px; }
       .nav-search input { width: 100%; min-width: 0; }
       .slider { min-height: 660px; }
       .slide-title { font-size: clamp(1.72rem, 8vw, 2.55rem); line-height: 1.08; }
