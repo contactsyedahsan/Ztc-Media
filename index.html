@@ -455,185 +455,66 @@
       to { transform: rotate(360deg); }
     }
 
-    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; }
-    .slide.active { opacity: 1; }
-
-    .slide-bg {
-      display: none;
-    }
-
-    .slide-content {
+    .hero-carousel {
       position: absolute;
-      top: 53%;
-      left: 50%;
-      bottom: auto;
-      transform: translate(-50%, -44%);
-      max-width: 980px;
-      width: min(980px, calc(100% - (var(--section-h-pad) * 2)));
-      text-align: center;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 2;
     }
 
-    .slide-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 18px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
-    }
-
-    .slide.active .slide-eyebrow { opacity: 1; transform: translateY(0); }
-
-    .slide-series-tag {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
-      color: #fff;
-      font-size: var(--text-xs);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 3px 12px;
-      border-radius: 999px;
-      box-shadow: 0 12px 30px rgba(200,21,27,0.32);
-    }
-
-    .slide-label {
-      font-size: var(--text-xs);
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .slide-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.15rem, 5.4vw, 5.4rem);
-      font-weight: 800;
-      line-height: 1.02;
-      margin-bottom: 14px;
-      color: #fff;
-      text-shadow: 0 2px 38px rgba(0,0,0,0.72);
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    }
-
-    .slide.active .slide-title { opacity: 1; transform: translateY(0); transition-delay: 0.06s; }
-
-    .slide-desc {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.65;
-      margin-bottom: 28px;
-      font-weight: 300;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    }
-
-    .slide.active .slide-desc { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
-
-    .slide-content .hero-card-stage { display: none; }
-
-    .hero-card-stage {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(240px, 0.82fr) minmax(360px, 1.12fr) minmax(240px, 0.82fr);
-      align-items: end;
-      gap: clamp(14px, 2vw, 28px);
-      width: min(1160px, 100%);
-      margin: 30px auto 0;
-      perspective: 1200px;
-    }
-
-    .hero-media-card {
-      position: relative;
+    .hc-card {
+      position: absolute;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 10px;
       background:
         linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
         rgba(14,14,14,0.82);
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 24px 70px rgba(0,0,0,0.56), inset 0 1px 0 rgba(255,255,255,0.08);
       backdrop-filter: blur(14px);
-      transform: translate3d(120px, 24px, 0) scale(0.94);
-      opacity: 0;
-      transition: transform 0.7s var(--ease), opacity 0.7s var(--ease), box-shadow 0.28s, border-color 0.28s;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.72s var(--ease), box-shadow 0.28s, border-color 0.28s;
+      cursor: pointer;
     }
 
-    .slide.active .hero-media-card {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .slide.active .hero-media-card--left { transition-delay: 0.18s; }
-    .slide.active .hero-media-card--center { transition-delay: 0.08s; }
-    .slide.active .hero-media-card--right { transition-delay: 0.26s; }
-
-    .slide.active .hero-media-card--left { animation: heroCardFromLeft 0.78s var(--ease) both; }
-    .slide.active .hero-media-card--center { animation: heroCardToCenter 0.78s var(--ease) both; }
-    .slide.active .hero-media-card--right { animation: heroCardFromRight 0.78s var(--ease) both; }
-
-    @keyframes heroCardFromLeft {
-      from { opacity: 0; transform: translate3d(-150px, 28px, 0) scale(0.88) rotateY(9deg); }
-      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); }
-    }
-
-    @keyframes heroCardToCenter {
-      from { opacity: 0; transform: translate3d(0, 46px, 0) scale(0.88); }
-      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-    }
-
-    @keyframes heroCardFromRight {
-      from { opacity: 0; transform: translate3d(150px, 28px, 0) scale(0.88) rotateY(-9deg); }
-      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); }
-    }
-
-    .hero-media-card:hover {
+    .hc-card:hover {
       border-color: rgba(232,135,26,0.42);
       box-shadow: 0 30px 86px rgba(0,0,0,0.66), 0 0 44px rgba(232,135,26,0.16);
-      transform: translateY(-7px) scale(1.02);
     }
 
-    .hero-media-card--center {
-      z-index: 2;
-      transform: translateY(26px) scale(0.96);
-    }
+    .hc-card.hc-center    { width: 420px; transform: translateX(0) scale(1);      opacity: 1;    z-index: 5; filter: brightness(1) saturate(1); }
+    .hc-card.hc-left      { width: 280px; transform: translateX(-390px) scale(0.85); opacity: 0.85; z-index: 4; filter: brightness(0.8) saturate(0.9); }
+    .hc-card.hc-right     { width: 280px; transform: translateX(390px) scale(0.85);  opacity: 0.85; z-index: 4; filter: brightness(0.8) saturate(0.9); }
+    .hc-card.hc-far-left  { width: 200px; transform: translateX(-640px) scale(0.72); opacity: 0.55; z-index: 3; filter: brightness(0.65) saturate(0.8); }
+    .hc-card.hc-far-right { width: 200px; transform: translateX(640px) scale(0.72);  opacity: 0.55; z-index: 3; filter: brightness(0.65) saturate(0.8); }
+    .hc-card.hc-hidden    { opacity: 0; pointer-events: none; z-index: 1; }
 
-    .hero-media-card--left,
-    .hero-media-card--right {
-      margin-bottom: 26px;
-      filter: saturate(0.92) brightness(0.92);
-    }
-
-    .hero-media-thumb {
+    .hc-thumb {
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
     }
 
-    .hero-media-thumb img {
+    .hc-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.55s var(--ease);
     }
 
-    .hero-media-card:hover .hero-media-thumb img { transform: scale(1.08); }
+    .hc-card:hover .hc-thumb img { transform: scale(1.08); }
 
-    .hero-media-thumb::after {
+    .hc-thumb::after {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.05) 56%);
     }
 
-    .hero-media-play {
+    .hc-play {
       position: absolute;
       inset: 0;
       display: grid;
@@ -643,13 +524,13 @@
       opacity: 0.95;
     }
 
-    .hero-media-play svg {
+    .hc-play svg {
       width: 46px;
       height: 46px;
       filter: drop-shadow(0 8px 20px rgba(0,0,0,0.45));
     }
 
-    .hero-media-body {
+    .hc-body {
       position: absolute;
       left: 14px;
       right: 14px;
@@ -658,7 +539,13 @@
       text-align: left;
     }
 
-    .hero-media-tag {
+    .hc-card.hc-center .hc-body { display: block; }
+    .hc-card.hc-left .hc-body,
+    .hc-card.hc-right .hc-body { display: block; font-size: 0.85em; }
+    .hc-card.hc-far-left .hc-body,
+    .hc-card.hc-far-right .hc-body { display: none; }
+
+    .hc-tag {
       display: inline-flex;
       margin-bottom: 6px;
       padding: 3px 8px;
@@ -671,7 +558,7 @@
       text-transform: uppercase;
     }
 
-    .hero-media-title {
+    .hc-title {
       color: #fff;
       font-size: 0.82rem;
       font-weight: 700;
@@ -679,163 +566,10 @@
       text-shadow: 0 2px 14px rgba(0,0,0,0.8);
     }
 
-    .hero-media-card--center .hero-media-title {
+    .hc-card.hc-center .hc-title {
       font-size: clamp(0.95rem, 1.2vw, 1.12rem);
     }
 
-    .btn-watch {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
-      color: #fff;
-      padding: 12px 26px;
-      font-size: var(--text-sm);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: none; cursor: pointer;
-      transition: transform 0.18s, box-shadow 0.22s, filter 0.22s;
-      border-radius: 999px;
-      box-shadow: 0 18px 42px rgba(200,21,27,0.32);
-      opacity: 0;
-      transform: translateY(18px);
-    }
-
-    .btn-watch:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 24px 60px rgba(232,135,26,0.30); }
-    .btn-watch svg { width: 16px; height: 16px; }
-    .slide.active .btn-watch { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
-    .slide.active .btn-watch:hover { transform: translateY(-2px); }
-
-    .hero-loop {
-      position: absolute;
-      left: 50%;
-      bottom: 118px;
-      width: min(1260px, calc(100% - (var(--section-h-pad) * 2)));
-      height: 250px;
-      transform: translateX(-50%);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .hero-loop-card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: min(430px, 34vw);
-      overflow: hidden;
-      border-radius: 8px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-        rgba(14,14,14,0.82);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.56), inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
-      opacity: 0;
-      pointer-events: auto;
-      transition: transform 0.82s var(--ease), opacity 0.82s var(--ease), filter 0.82s var(--ease), box-shadow 0.28s, border-color 0.28s;
-    }
-
-    .hero-loop-card.is-active {
-      opacity: 1;
-      z-index: 4;
-      width: min(500px, 39vw);
-      transform: translate(-50%, -50%) scale(1);
-      filter: brightness(1) saturate(1);
-    }
-
-    .hero-loop-card.is-prev {
-      opacity: 1;
-      z-index: 2;
-      transform: translate(calc(-50% - 390px), -44%) scale(0.74);
-      filter: brightness(0.76) saturate(0.9);
-    }
-
-    .hero-loop-card.is-next {
-      opacity: 1;
-      z-index: 2;
-      transform: translate(calc(-50% + 390px), -44%) scale(0.74);
-      filter: brightness(0.76) saturate(0.9);
-    }
-
-    .hero-loop-card.is-hidden {
-      opacity: 0;
-      transform: translate(calc(-50% + 560px), -42%) scale(0.62);
-      filter: brightness(0.55);
-    }
-
-    .hero-loop-card:hover {
-      border-color: rgba(232,135,26,0.42);
-      box-shadow: 0 30px 86px rgba(0,0,0,0.66), 0 0 44px rgba(232,135,26,0.16);
-    }
-
-    .hero-loop-thumb {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-    }
-
-    .hero-loop-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.55s var(--ease);
-    }
-
-    .hero-loop-card:hover .hero-loop-thumb img { transform: scale(1.06); }
-
-    .hero-loop-thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.76), rgba(0,0,0,0.05) 58%);
-    }
-
-    .hero-loop-play {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      z-index: 2;
-      color: #fff;
-      opacity: 0.92;
-    }
-
-    .hero-loop-play svg {
-      width: 52px;
-      height: 52px;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.45));
-    }
-
-    .hero-loop-body {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 16px;
-      z-index: 3;
-      text-align: left;
-    }
-
-    .hero-loop-tag {
-      display: inline-flex;
-      margin-bottom: 7px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(232,135,26,0.20);
-      color: var(--brand-orange);
-      font-size: 0.66rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-loop-title {
-      color: #fff;
-      font-size: clamp(1rem, 1.25vw, 1.22rem);
-      font-weight: 800;
-      line-height: 1.24;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.8);
-    }
 
     .slider-dots {
       position: absolute;
@@ -1800,148 +1534,61 @@
 <!-- ═══ HERO SLIDER ═══════════════════════════════════════ -->
 <div class="slider" id="home">
 
-  <div class="slide active">
-    <img class="slide-bg" src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
-    <div class="slide-content">
-      <div class="slide-eyebrow">
-        <span class="slide-series-tag">Real Story</span>
-        <span class="slide-label">ZTC Investigates</span>
+  <div class="hero-carousel" id="heroCarousel">
+    <a class="hc-card hc-far-left" data-idx="0" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank">
+      <div class="hc-thumb">
+        <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
       </div>
-      <h1 class="slide-title">The Goat Life Movie — The Reality of Saudi Arabia</h1>
-      <p class="slide-desc">The true story of a man trapped in the deserts of Saudi Arabia — a gripping real-life account brought to you by ZTC Media.</p>
-      <a href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank" class="btn-watch">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Watch Now
-      </a>
-      <div class="hero-card-stage" aria-label="Featured ZTC videos">
-        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">World</div>
-              <div class="hero-media-title">Saudi Arabia's Future Without Oil</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Real Story</div>
-              <div class="hero-media-title">The Goat Life Movie | Reality of Saudi Arabia</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Pakistan</div>
-              <div class="hero-media-title">Azad Kashmir Hydropower Projects</div>
-            </div>
-          </div>
-        </a>
+      <div class="hc-body">
+        <div class="hc-tag">Real Story</div>
+        <div class="hc-title">The Goat Life Movie</div>
       </div>
-    </div>
-  </div>
+    </a>
 
-  <div class="slide">
-    <img class="slide-bg" src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
-    <div class="slide-content">
-      <div class="slide-eyebrow">
-        <span class="slide-series-tag">World</span>
-        <span class="slide-label">ZTC Analysis</span>
+    <a class="hc-card hc-left" data-idx="1" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank">
+      <div class="hc-thumb">
+        <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
+        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
       </div>
-      <h1 class="slide-title">Saudi Arabia's Future Without Oil — What Comes Next?</h1>
-      <p class="slide-desc">With oil reserves diminishing, what does the future hold for Saudi Arabia? An in-depth ZTC Media investigation.</p>
-      <a href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank" class="btn-watch">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Watch Now
-      </a>
-      <div class="hero-card-stage" aria-label="Featured ZTC videos">
-        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Real Story</div>
-              <div class="hero-media-title">The Goat Life Movie</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">World</div>
-              <div class="hero-media-title">Saudi Arabia's Future Without Oil</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Politics</div>
-              <div class="hero-media-title">Pakistan's New Political Map</div>
-            </div>
-          </div>
-        </a>
+      <div class="hc-body">
+        <div class="hc-tag">World</div>
+        <div class="hc-title">Saudi Arabia's Future Without Oil</div>
       </div>
-    </div>
-  </div>
+    </a>
 
-  <div class="slide">
-    <img class="slide-bg" src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
-    <div class="slide-content">
-      <div class="slide-eyebrow">
-        <span class="slide-series-tag">ZTC Exclusive</span>
-        <span class="slide-label">Featured</span>
+    <a class="hc-card hc-center" data-idx="2" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+      <div class="hc-thumb">
+        <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
       </div>
-      <h1 class="slide-title">ZTC Media — Stories That Change How You See the World</h1>
-      <p class="slide-desc">Our journalists never compromise on truth — delivering stories that inform, inspire, and reshape perspectives.</p>
-      <a href="https://youtu.be/ji1wdBQwNGg?si=N3OC72R-UzUN9IDu" target="_blank" class="btn-watch">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Watch Now
-      </a>
-      <div class="hero-card-stage" aria-label="Featured ZTC videos">
-        <a class="hero-media-card hero-media-card--left" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Society</div>
-              <div class="hero-media-title">Mobile Phones and Kids</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--center" href="https://youtu.be/ji1wdBQwNGg?si=N3OC72R-UzUN9IDu" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">Featured</div>
-              <div class="hero-media-title">Stories That Change How You See the World</div>
-            </div>
-          </div>
-        </a>
-        <a class="hero-media-card hero-media-card--right" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
-          <div class="hero-media-thumb">
-            <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
-            <span class="hero-media-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-            <div class="hero-media-body">
-              <div class="hero-media-tag">History</div>
-              <div class="hero-media-title">Where Did Pyramids Come From?</div>
-            </div>
-          </div>
-        </a>
+      <div class="hc-body">
+        <div class="hc-tag">Pakistan</div>
+        <div class="hc-title">Azad Kashmir Hydropower Projects</div>
       </div>
-    </div>
+    </a>
+
+    <a class="hc-card hc-right" data-idx="3" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+      <div class="hc-thumb">
+        <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+      </div>
+      <div class="hc-body">
+        <div class="hc-tag">Politics</div>
+        <div class="hc-title">Pakistan's Political Map</div>
+      </div>
+    </a>
+
+    <a class="hc-card hc-far-right" data-idx="4" href="https://youtu.be/ji1wdBQwNGg?si=N3OC72R-UzUN9IDu" target="_blank">
+      <div class="hc-thumb">
+        <img src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
+        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
+      </div>
+      <div class="hc-body">
+        <div class="hc-tag">Featured</div>
+        <div class="hc-title">ZTC Media Exclusive</div>
+      </div>
+    </a>
   </div>
 
   <button class="slider-arrow prev" onclick="changeSlide(-1)">
@@ -1955,6 +1602,8 @@
     <button class="dot active" onclick="goToSlide(0)"></button>
     <button class="dot" onclick="goToSlide(1)"></button>
     <button class="dot" onclick="goToSlide(2)"></button>
+    <button class="dot" onclick="goToSlide(3)"></button>
+    <button class="dot" onclick="goToSlide(4)"></button>
   </div>
 
   <div class="hero-scroll-hint">
@@ -2525,28 +2174,46 @@
 
 <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
 <script>
-  /* ── Slider ── */
-  let current = 0;
-  const slides = document.querySelectorAll('.slide');
-  const dots   = document.querySelectorAll('.dot');
+  /* ── Hero Carousel ── */
+  const carousel = document.getElementById('heroCarousel');
+  const cards = document.querySelectorAll('.hc-card');
+  const dots = document.querySelectorAll('.dot');
+  let centerIdx = 2;
   let timer;
 
+  function renderCarousel() {
+    cards.forEach((card, i) => {
+      card.className = 'hc-card';
+      const offset = (i - centerIdx + cards.length) % cards.length;
+      if (offset === 0) card.classList.add('hc-center');
+      else if (offset === 1) card.classList.add('hc-right');
+      else if (offset === 2) card.classList.add('hc-far-right');
+      else if (offset === cards.length - 2) card.classList.add('hc-left');
+      else if (offset === cards.length - 1) card.classList.add('hc-far-left');
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === centerIdx));
+  }
+
   function goToSlide(n) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
+    centerIdx = (n + cards.length) % cards.length;
+    renderCarousel();
     resetTimer();
   }
 
-  function changeSlide(dir) { goToSlide(current + dir); }
+  function changeSlide(dir) { goToSlide(centerIdx + dir); }
 
   function resetTimer() {
     clearInterval(timer);
-    timer = setInterval(() => changeSlide(1), 5000);
+    timer = setInterval(() => changeSlide(1), 4500);
   }
 
+  cards.forEach((card, i) => {
+    card.addEventListener('click', (e) => {
+      if (i !== centerIdx) { e.preventDefault(); goToSlide(i); }
+    });
+  });
+
+  renderCarousel();
   resetTimer();
 
   document.addEventListener('keydown', e => {
