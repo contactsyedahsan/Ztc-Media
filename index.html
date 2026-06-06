@@ -2319,7 +2319,7 @@
         height: 40px;
         padding: 0 13px;
       }
-      .nav-search input { width: 100%; min-width: 0; font-size: 0.8rem; }
+      .nav-search input { width: 100%; min-width: 0; font-size: 0.76rem; text-overflow: ellipsis; }
       .theme-toggle, .auth-btn { width: 40px; height: 40px; flex-shrink: 0; }  /* icons never shrink */
       .auth-wrap { flex-shrink: 0; }
       .theme-toggle { padding: 0; justify-content: center; gap: 0; }
@@ -3370,6 +3370,17 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('DOMContentLoaded', onScroll);
     onScroll();
+  })();
+
+  /* ── Search: shorter placeholder on small screens so it fits ── */
+  (function () {
+    const input = document.querySelector('.nav-search input');
+    if (!input) return;
+    const FULL  = 'Search ZTC stories, videos, series...';
+    const SHORT = 'Search ZTC...';
+    const apply = () => { input.placeholder = window.innerWidth <= 768 ? SHORT : FULL; };
+    apply();
+    window.addEventListener('resize', apply, { passive: true });
   })();
 
   /* ── Coming Soon: intercept story links (no external navigation) ── */
