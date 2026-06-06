@@ -2294,7 +2294,7 @@
     @media (max-width: 768px) {
       :root { --section-h-pad: 24px; }
       section { padding: 56px var(--section-h-pad); }
-      /* Single clean row: logo · search · theme · auth (evenly spaced) */
+      /* Single clean row: logo · [search · theme · auth] — everything fits */
       nav {
         display: flex;
         align-items: center;
@@ -2302,20 +2302,27 @@
         padding: 0 var(--section-h-pad);
         height: 65px;
       }
-      .nav-logo { flex-shrink: 0; }
-      .nav-logo img { height: 78px; width: 78px; }
-      .nav-links { display: none; }          /* categories live in the page; keep the bar clean on phones */
-      .nav-search {
+      .nav-logo { flex-shrink: 0; }            /* logo keeps its best size */
+      .nav-links { display: none; }            /* categories live in the page; keep the bar clean on phones */
+
+      /* nav-right holds search + theme + auth; it takes the leftover width */
+      .nav-right {
         flex: 1 1 auto;
+        min-width: 0;
+        gap: 9px;
+        justify-content: flex-end;
+      }
+      .nav-search {
+        flex: 1 1 auto;                        /* shrinks first so the icons always stay visible */
         width: auto; min-width: 0;
         max-width: none;
         height: 40px;
-        padding: 0 14px;
+        padding: 0 13px;
       }
-      .nav-search input { width: 100%; min-width: 0; font-size: 0.82rem; }
-      .nav-right { gap: 10px; flex-shrink: 0; }
-      .auth-btn { width: 40px; height: 40px; }
-      .theme-toggle { width: 40px; height: 40px; padding: 0; justify-content: center; gap: 0; }
+      .nav-search input { width: 100%; min-width: 0; font-size: 0.8rem; }
+      .theme-toggle, .auth-btn { width: 40px; height: 40px; flex-shrink: 0; }  /* icons never shrink */
+      .auth-wrap { flex-shrink: 0; }
+      .theme-toggle { padding: 0; justify-content: center; gap: 0; }
       .theme-toggle-label { display: none; }
       .slider { min-height: auto; padding-top: calc(65px + 24px); padding-bottom: 40px; }
       .hero-lead-title { font-size: clamp(1.45rem, 6vw, 1.95rem); }
