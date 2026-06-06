@@ -164,6 +164,100 @@
 
       /* Ease */
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+      /* Page background (theme-driven) */
+      --page-bg:
+        radial-gradient(circle at 50% 8%, rgba(232,135,26,0.22), transparent 28%),
+        radial-gradient(circle at 18% 22%, rgba(200,21,27,0.20), transparent 30%),
+        #030303;
+
+      /* Theme-driven surfaces — DEFAULT = NIGHT (signature dark) */
+      --nav-bg: rgba(8,8,8,0.72);
+      --header-shadow: rgba(0,0,0,0.6);
+      --sec-1: rgba(8,8,8,0.68);
+      --sec-2: rgba(14,14,14,0.74);
+      --sec-3: rgba(5,5,5,0.76);
+      --on-image: #ffffff;
+      --grid-line: rgba(255,255,255,0.022);
+
+      /* Hero panels (off-image surfaces) */
+      --hero-panel: linear-gradient(165deg, rgba(20,20,20,0.92), rgba(10,10,10,0.94));
+      --hero-card-bg: rgba(16,16,16,0.7);
+      --nav-pill-bg: rgba(255,255,255,0.045);
+      --nav-pill-border: rgba(255,255,255,0.08);
+
+      /* Hero section background */
+      --hero-bg:
+        radial-gradient(circle at 50% 24%, rgba(232,135,26,0.30), transparent 24%),
+        radial-gradient(circle at 18% 18%, rgba(200,21,27,0.18), transparent 28%),
+        radial-gradient(circle at 86% 30%, rgba(232,135,26,0.13), transparent 26%),
+        #030303;
+      --hero-glow-opacity: 0.72;
+      --hero-eyebrow-rule: var(--border-subtle);
+
+      /* solid colour used for edge-fades over section backgrounds */
+      --fade-color: #0c0c0c;
+
+      /* glassy card surface */
+      --card-bg:
+        linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.035)),
+        rgba(18,18,18,0.88);
+      --card-border: rgba(255,255,255,0.09);
+      --card-inset: inset 0 1px 0 rgba(255,255,255,0.06);
+      --card-thumb-bg: #1a1a1a;
+      --card-shadow-hover: 0 24px 60px rgba(0,0,0,0.60), 0 0 38px rgba(232,135,26,0.14);
+    }
+
+    /* ════════════════════════════════════════════════
+       THEME: DAY (light, professional newsroom)
+    ════════════════════════════════════════════════ */
+    [data-theme="day"] {
+      --bg-base:      #ffffff;
+      --bg-surface:   #f5f6f8;
+      --bg-elevated:  #ffffff;
+      --bg-card:      #ffffff;
+      --bg-card-hover:#fafbfc;
+
+      --text-primary:   #14161b;
+      --text-secondary: rgba(20,22,27,0.68);
+      --text-muted:     rgba(20,22,27,0.48);
+      --text-caption:   rgba(20,22,27,0.56);
+
+      --border-subtle: rgba(18,20,26,0.10);
+      --border-light:  rgba(18,20,26,0.17);
+
+      --page-bg:
+        radial-gradient(circle at 50% 0%, rgba(232,135,26,0.07), transparent 32%),
+        radial-gradient(circle at 86% 10%, rgba(200,21,27,0.045), transparent 28%),
+        #eef0f3;
+
+      --nav-bg: rgba(255,255,255,0.85);
+      --header-shadow: rgba(18,20,26,0.10);
+      --sec-1: rgba(255,255,255,0.72);
+      --sec-2: rgba(244,245,247,0.86);
+      --sec-3: rgba(255,255,255,0.8);
+      --grid-line: rgba(18,20,26,0.03);
+
+      --hero-panel: linear-gradient(165deg, #ffffff, #f6f7f9);
+      --hero-card-bg: #ffffff;
+      --nav-pill-bg: rgba(18,20,26,0.04);
+      --nav-pill-border: rgba(18,20,26,0.09);
+
+      --hero-bg:
+        radial-gradient(circle at 50% 16%, rgba(232,135,26,0.10), transparent 30%),
+        radial-gradient(circle at 14% 16%, rgba(200,21,27,0.06), transparent 30%),
+        radial-gradient(circle at 88% 26%, rgba(232,135,26,0.07), transparent 28%),
+        #eef0f3;
+      --hero-glow-opacity: 0.30;
+
+      --fade-color: #f4f5f7;
+
+      --card-bg:
+        linear-gradient(145deg, #ffffff, #fbfbfd);
+      --card-border: rgba(18,20,26,0.10);
+      --card-inset: inset 0 1px 0 rgba(255,255,255,0.6);
+      --card-thumb-bg: #e9eaee;
+      --card-shadow-hover: 0 22px 50px rgba(18,20,26,0.16), 0 0 30px rgba(232,135,26,0.10);
     }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -174,14 +268,12 @@
     body {
       font-family: var(--font-body);
       font-size: var(--text-base);
-      background:
-        radial-gradient(circle at 50% 8%, rgba(232,135,26,0.22), transparent 28%),
-        radial-gradient(circle at 18% 22%, rgba(200,21,27,0.20), transparent 30%),
-        #030303;
+      background: var(--page-bg);
       color: var(--text-primary);
       overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.45s var(--ease), color 0.45s var(--ease);
     }
 
     body::before,
@@ -205,8 +297,8 @@
 
     body::after {
       background:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 58px 58px;
       mask-image: radial-gradient(circle at 50% 20%, #000 0%, transparent 65%);
       opacity: 0.24;
@@ -266,6 +358,21 @@
     }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCROLL PROGRESS BAR
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0;
+      z-index: 1100;
+      background: linear-gradient(90deg, var(--brand-red), var(--brand-orange));
+      box-shadow: 0 0 12px rgba(232,135,26,0.5);
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        NAVBAR
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     nav {
@@ -278,6 +385,12 @@
       align-items: center;
       padding: 0 var(--section-h-pad);
       height: 95px;
+      transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease), backdrop-filter 0.3s;
+    }
+    nav.nav-scrolled {
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px var(--header-shadow);
     }
 
     .nav-logo {
@@ -304,8 +417,8 @@
       gap: 4px;
       list-style: none;
       justify-self: center;
-      background: rgba(255,255,255,0.045);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--nav-pill-bg);
+      border: 1px solid var(--nav-pill-border);
       border-radius: 999px;
       padding: 5px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
@@ -321,6 +434,31 @@
       border-radius: 999px;
       transition: color 0.2s, background 0.2s, transform 0.2s;
       position: relative;
+    }
+
+    /* NIGHT (default): at top over the dark hero image → keep nav controls light */
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-links {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-links a { color: rgba(255,255,255,0.82); }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-search { background: rgba(255,255,255,0.08); }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-search input { color: #fff; }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-search input::placeholder { color: rgba(255,255,255,0.55); }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .nav-search svg { color: rgba(255,255,255,0.7); }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .theme-toggle,
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .auth-btn {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.85);
+    }
+    :root:not([data-theme="day"]) nav:not(.nav-scrolled) .auth-btn svg { color: rgba(255,255,255,0.85); }
+
+    /* DAY: at top, hero is light → give the nav a soft solid backdrop so controls stay readable */
+    [data-theme="day"] nav:not(.nav-scrolled) {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 24px rgba(18,20,26,0.06);
     }
 
     .nav-links a::after {
@@ -361,7 +499,7 @@
       align-items: center;
       width: 240px;
       height: 42px;
-      background: rgba(255,255,255,0.055);
+      background: var(--nav-pill-bg);
       border: 1px solid rgba(232,135,26,0.20);
       border-radius: 999px;
       padding: 0 16px;
@@ -371,7 +509,7 @@
     }
 
     .nav-search:focus-within {
-      background: rgba(255,255,255,0.10);
+      background: var(--bg-card);
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(232,135,26,0.12), 0 18px 54px rgba(200,21,27,0.20);
     }
@@ -394,14 +532,91 @@
 
     .nav-search input::placeholder { color: var(--text-muted); }
 
+    /* Theme toggle */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 14px 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-light);
+      background: rgba(127,127,127,0.06);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: border-color 0.22s, background 0.22s, color 0.22s;
+      white-space: nowrap;
+    }
+    .theme-toggle:hover {
+      border-color: rgba(232,135,26,0.4);
+      color: var(--text-primary);
+      background: rgba(232,135,26,0.08);
+    }
+    .theme-toggle-icon {
+      width: 18px; height: 18px;
+      display: grid; place-items: center;
+      color: var(--accent);
+    }
+    .theme-toggle-icon svg { width: 18px; height: 18px; }
+    .theme-toggle-label { line-height: 1; }
+
+    /* Coming Soon toast */
+    .soon-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 34px;
+      transform: translate(-50%, 140%);
+      z-index: 4000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 20px 13px 16px;
+      background: linear-gradient(135deg, rgba(22,22,22,0.97), rgba(12,12,12,0.97));
+      border: 1px solid rgba(232,135,26,0.4);
+      border-radius: 999px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 40px rgba(232,135,26,0.14);
+      color: var(--text-primary);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s var(--ease), opacity 0.4s var(--ease);
+      backdrop-filter: blur(14px);
+      max-width: calc(100% - 32px);
+    }
+    [data-theme="day"] .soon-toast {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,248,246,0.98));
+      box-shadow: 0 20px 60px rgba(16,18,22,0.18), 0 0 40px rgba(232,135,26,0.12);
+    }
+    .soon-toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+    .soon-toast-icon {
+      width: 30px; height: 30px;
+      flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      color: #fff;
+    }
+    .soon-toast-icon svg { width: 16px; height: 16px; }
+    .soon-toast b { color: var(--accent); font-weight: 800; }
+
     /* Auth */
     .auth-wrap { position: relative; }
 
     .auth-btn {
       width: 42px; height: 42px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.055);
+      border: 1px solid var(--nav-pill-border);
+      background: var(--nav-pill-bg);
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: border-color 0.22s, background 0.22s;
@@ -503,18 +718,13 @@
       width: 100%;
       min-height: 100svh;
       overflow: hidden;
-      padding-top: calc(95px + 24px);
-      padding-bottom: 40px;
+      padding: calc(95px + 28px) var(--section-h-pad) 56px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(circle at 50% 24%, rgba(232,135,26,0.34), transparent 22%),
-        radial-gradient(circle at 48% 32%, rgba(200,21,27,0.26), transparent 34%),
-        radial-gradient(circle at 14% 24%, rgba(200,21,27,0.16), transparent 24%),
-        radial-gradient(circle at 88% 38%, rgba(232,135,26,0.14), transparent 25%),
-        #030303;
+      background: var(--hero-bg);
+      transition: background 0.45s var(--ease);
     }
 
     .slider::before {
@@ -523,7 +733,7 @@
       inset: -12%;
       background: conic-gradient(from 120deg at 50% 35%, transparent 0deg, rgba(232,135,26,0.20) 52deg, rgba(200,21,27,0.22) 112deg, transparent 172deg, transparent 360deg);
       filter: blur(20px);
-      opacity: 0.72;
+      opacity: var(--hero-glow-opacity);
       animation: heroEnergySpin 16s linear infinite;
     }
 
@@ -531,297 +741,359 @@
       to { transform: rotate(360deg); }
     }
 
-    .hero-carousel {
+    /* ════════════════════════════════════════════════
+       HERO — AL JAZEERA STYLE (lead + live feed + cards)
+    ════════════════════════════════════════════════ */
+    .hero-aj {
       position: relative;
+      z-index: 2;
       width: 100%;
-      height: clamp(292px, 31.5vw, 472px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
-      z-index: 2;
-    }
-
-    .hc-card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      overflow: hidden;
-      border-radius: 12px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-        rgba(14,14,14,0.82);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.56), inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.68s var(--ease), box-shadow 0.28s, border-color 0.28s;
-      cursor: pointer;
-    }
-
-    .hc-card:hover {
-      border-color: rgba(232,135,26,0.42);
-      box-shadow: 0 30px 86px rgba(0,0,0,0.66), 0 0 44px rgba(232,135,26,0.16);
-    }
-
-    .hc-card.hc-center    { width: clamp(520px, 56vw, 840px); aspect-ratio: 16/9; transform: translate(-50%,-50%);                   opacity: 1;    z-index: 5; filter: brightness(1) saturate(1); box-shadow: 0 40px 120px rgba(0,0,0,0.72), 0 0 60px rgba(232,135,26,0.20); }
-    .hc-card.hc-left      { width: clamp(240px, 18vw, 320px); aspect-ratio: 16/9; transform: translate(-50%,-50%) translateX(-450px);  opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
-    .hc-card.hc-right     { width: clamp(240px, 18vw, 320px); aspect-ratio: 16/9; transform: translate(-50%,-50%) translateX(450px);   opacity: 0.65; z-index: 4; filter: brightness(0.68) saturate(0.85) blur(0.5px); }
-    .hc-card.hc-far-left  { width: clamp(160px, 12vw, 220px); aspect-ratio: 16/9; transform: translate(-50%,-50%) translateX(-720px);  opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
-    .hc-card.hc-far-right { width: clamp(160px, 12vw, 220px); aspect-ratio: 16/9; transform: translate(-50%,-50%) translateX(720px);   opacity: 0.35; z-index: 3; filter: brightness(0.55) saturate(0.75) blur(1px); }
-    .hc-card.hc-hidden    { opacity: 0; pointer-events: none; z-index: 1; }
-
-    .hc-thumb {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-    }
-
-    .hc-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.55s var(--ease);
-    }
-
-    .hc-card:hover .hc-thumb img { transform: scale(1.08); }
-
-    .hc-thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.05) 56%);
-    }
-
-    .hc-play {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      z-index: 2;
-      color: #fff;
-      opacity: 0.95;
-    }
-
-    .hc-play svg {
-      width: 46px;
-      height: 46px;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.45));
-    }
-
-    .hc-category-badge {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 12px;
-      background: linear-gradient(135deg, rgba(200,21,27,0.92), rgba(232,135,26,0.92));
-      color: #fff;
-      font-size: 0.70rem;
-      font-weight: 800;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      border-radius: 4px;
-      z-index: 4;
-      white-space: nowrap;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.48);
-    }
-
-    .hc-card.hc-center .hc-category-badge { display: flex; }
-    .hc-card.hc-left .hc-category-badge,
-    .hc-card.hc-right .hc-category-badge,
-    .hc-card.hc-far-left .hc-category-badge,
-    .hc-card.hc-far-right .hc-category-badge { display: none; }
-
-    .hc-body {
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 12px;
-      z-index: 3;
-      text-align: left;
-    }
-
-    .hc-card.hc-center .hc-body { display: block; }
-    .hc-card.hc-left .hc-body,
-    .hc-card.hc-right .hc-body { display: block; font-size: 0.85em; }
-    .hc-card.hc-far-left .hc-body,
-    .hc-card.hc-far-right .hc-body { display: none; }
-
-    .hc-tag {
-      display: inline-flex;
-      margin-bottom: 6px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(232,135,26,0.18);
-      color: var(--brand-orange);
-      font-size: 0.62rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hc-title {
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      line-height: 1.28;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.8);
-    }
-
-    .hc-card.hc-center .hc-title {
-      font-size: clamp(0.95rem, 1.2vw, 1.12rem);
-    }
-
-    .hero-info {
-      position: relative;
-      width: min(720px, calc(100% - (var(--section-h-pad) * 2)));
-      text-align: center;
-      z-index: 2;
+      max-width: 1360px;
+      margin: 0 auto;
       opacity: 0;
-      animation: fadeInUp 0.6s var(--ease) 0.2s forwards;
-      margin-top: 0;
+      animation: fadeInUp 0.8s var(--ease) 0.1s forwards;
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-info-content {
+    /* eyebrow strip above the grid */
+    .hero-eyebrow {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
     }
-
-    .hero-info-tag {
+    .hero-eyebrow-live {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      align-self: center;
-      padding: 5px 14px;
-      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+    }
+    .hero-eyebrow-live::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--brand-orange);
+      box-shadow: 0 0 0 0 rgba(232,135,26,0.55);
+      animation: livePulse 1.8s ease-out infinite;
+    }
+    @keyframes livePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(232,135,26,0.5); }
+      70%  { box-shadow: 0 0 0 9px rgba(232,135,26,0); }
+      100% { box-shadow: 0 0 0 0 rgba(232,135,26,0); }
+    }
+    .hero-eyebrow-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero-eyebrow-rule { flex: 1; height: 1px; background: var(--border-subtle); }
+
+    /* main grid: big lead (left) + live feed (right) */
+    .hero-main {
+      display: grid;
+      grid-template-columns: 1.85fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    /* ── LEAD STORY ── */
+    .hero-lead {
+      position: relative;
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      min-height: clamp(380px, 50vh, 540px);
+      box-shadow: 0 40px 110px rgba(0,0,0,0.6);
+    }
+    .hero-lead-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.1s var(--ease), opacity 0.55s var(--ease);
+    }
+    .hero-lead:hover .hero-lead-img { transform: scale(1.05); }
+    .hero-lead::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(3,3,3,0.95) 2%, rgba(3,3,3,0.55) 34%, rgba(3,3,3,0.08) 66%, rgba(3,3,3,0.18) 100%);
+    }
+    .hero-lead-body {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 2;
+      padding: clamp(26px, 3.2vw, 46px);
+    }
+    .hero-lead-tags {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .hero-lead-breaking {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 13px;
+      background: var(--brand-red);
       color: #fff;
-      font-size: var(--text-xs);
-      font-weight: 700;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+    .hero-lead-breaking::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #fff;
+      animation: liveBlink 1.3s steps(1) infinite;
+    }
+    @keyframes liveBlink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+    .hero-lead-cat {
+      font-size: 0.68rem;
+      font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      border-radius: 999px;
-      box-shadow: 0 8px 24px rgba(200,21,27,0.28);
-      min-height: 24px;
-      line-height: 1;
+      color: var(--brand-orange);
     }
-
-    .hero-info-title {
+    .hero-lead-title {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 700;
-      line-height: 1.08;
+      font-size: clamp(1.7rem, 3vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.1;
       color: #fff;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.48);
-      margin: 0;
+      margin-bottom: 14px;
+      text-shadow: 0 4px 34px rgba(0,0,0,0.8);
+      max-width: 94%;
+      transition: opacity 0.4s var(--ease);
     }
-
-    .hero-info-desc {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.75);
+    .hero-lead-excerpt {
+      font-size: clamp(0.92rem, 1vw, 1.05rem);
+      color: rgba(255,255,255,0.82);
       line-height: 1.6;
-      margin: 0;
-      max-width: 540px;
-      margin: 0 auto;
+      max-width: 72%;
+      margin-bottom: 22px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-
-    .hero-info-cta {
+    .hero-lead-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      width: fit-content;
-      min-width: auto;
-      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
-      color: #fff;
-      padding: 12px 22px;
-      font-size: 0.75rem;
+      gap: 9px;
+      font-size: 0.76rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      border: none;
-      border-radius: 999px;
-      box-shadow: 0 12px 32px rgba(200,21,27,0.28);
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
-      margin: 14px auto 0;
+      color: #fff;
     }
-
-    .hero-info-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 22px 60px rgba(232,135,26,0.30);
-      filter: brightness(1.08);
+    .hero-lead-cta span {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      transition: transform 0.25s var(--ease);
     }
+    .hero-lead:hover .hero-lead-cta span { transform: translateX(4px); }
+    .hero-lead-cta svg { width: 15px; height: 15px; }
 
-    .slider-dots {
-      position: relative;
+    /* ── LIVE FEED (right column) ── */
+    .hero-feed {
       display: flex;
-      gap: 8px;
-      margin-top: 24px;
-      justify-content: center;
+      flex-direction: column;
+      background: var(--hero-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 0 24px;
+      box-shadow: 0 40px 110px var(--header-shadow);
     }
-
-    .dot {
-      width: 24px; height: 3px;
-      background: rgba(255,255,255,0.25);
-      border: none; cursor: pointer;
-      transition: background 0.25s, width 0.3s var(--ease);
-      border-radius: 2px;
-    }
-
-    .dot.active { background: var(--brand-orange); width: 48px; }
-
-    .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(232,135,26,0.22);
-      color: white;
-      width: 44px;
-      height: 44px;
+    .hero-feed-head {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.22s;
-      z-index: 10;
-      border-radius: 50%;
-      backdrop-filter: blur(12px);
+      justify-content: space-between;
+      padding: 20px 0 16px;
+      border-bottom: 1px solid var(--border-subtle);
     }
+    .hero-feed-head h3 {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+    .hero-feed-head h3::before {
+      content: '';
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--brand-orange);
+      animation: liveBlink 1.5s steps(1) infinite;
+    }
+    .hero-feed-all {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-feed-all:hover { opacity: 0.7; }
 
-    .slider-arrow:hover { background: linear-gradient(135deg, var(--brand-red), var(--brand-orange)); border-color: transparent; }
-    .slider-arrow.prev { left: 22px; }
-    .slider-arrow.next { right: 22px; }
+    .hero-feed-item {
+      display: block;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      cursor: pointer;
+      transition: padding-left 0.25s var(--ease);
+    }
+    .hero-feed-item:last-child { border-bottom: none; }
+    .hero-feed-item::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--brand-red), var(--brand-orange));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .hero-feed-item:hover { padding-left: 8px; }
+    .hero-feed-item.is-active { padding-left: 8px; }
+    .hero-feed-item.is-active::before,
+    .hero-feed-item:hover::before { opacity: 1; }
+
+    .hero-feed-time {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+      margin-bottom: 6px;
+    }
+    .hero-feed-time::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--brand-orange);
+    }
+    .hero-feed-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-primary);
+      transition: color 0.2s;
+    }
+    .hero-feed-item:hover .hero-feed-title,
+    .hero-feed-item.is-active .hero-feed-title { color: var(--accent); }
+
+    /* ── SECONDARY STORY CARDS (row below) ── */
+    .hero-secondary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .hero-sec-card {
+      display: block;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      background: var(--hero-card-bg);
+      border: 1px solid var(--border-subtle);
+      transition: transform 0.28s var(--ease), border-color 0.28s, box-shadow 0.28s;
+    }
+    .hero-sec-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(232,135,26,0.34);
+      box-shadow: 0 20px 48px var(--header-shadow);
+    }
+    .hero-sec-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+    .hero-sec-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease);
+    }
+    .hero-sec-card:hover .hero-sec-thumb img { transform: scale(1.08); }
+    .hero-sec-cat {
+      position: absolute;
+      top: 10px; left: 10px;
+      padding: 4px 10px;
+      background: rgba(3,3,3,0.7);
+      backdrop-filter: blur(6px);
+      color: var(--brand-orange);
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+    .hero-sec-body { padding: 13px 15px 16px; }
+    .hero-sec-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.36;
+      color: var(--text-primary);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+    }
+    .hero-sec-card:hover .hero-sec-title { color: var(--accent); }
 
     /* Scroll indicator */
     .hero-scroll-hint {
       position: absolute;
-      bottom: 32px;
+      bottom: 18px;
       right: var(--section-h-pad);
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: var(--text-xs);
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.32);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      z-index: 2;
     }
-
     .hero-scroll-hint svg { width: 14px; height: 14px; animation: bounceDown 1.8s ease infinite; }
-
     @keyframes bounceDown {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(4px); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-secondary { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .hero-main { grid-template-columns: 1fr; gap: 20px; }
+      .hero-lead { min-height: 340px; }
+      .hero-lead-excerpt { max-width: 100%; }
+      .hero-scroll-hint { display: none; }
+    }
+    @media (max-width: 560px) {
+      .hero-secondary { grid-template-columns: 1fr; }
     }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -908,8 +1180,8 @@
       width: 100px; z-index: 2; pointer-events: none;
     }
 
-    .carousel-outer::before { left: 0; background: linear-gradient(to right, #080808, transparent); }
-    .carousel-outer::after  { right: 0; background: linear-gradient(to left, #080808, transparent); }
+    .carousel-outer::before { left: 0; background: linear-gradient(to right, var(--fade-color), transparent); }
+    .carousel-outer::after  { right: 0; background: linear-gradient(to left, var(--fade-color), transparent); }
 
     .carousel-track {
       display: flex;
@@ -930,7 +1202,6 @@
        CONTENT CARD — BASE
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     .card {
-      background: var(--bg-card);
       border-radius: var(--radius-md);
       overflow: hidden;
       cursor: pointer;
@@ -938,17 +1209,15 @@
       text-decoration: none;
       color: inherit;
       display: block;
-      border: 1px solid rgba(255,255,255,0.09);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.035)),
-        rgba(18,18,18,0.88);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      box-shadow: var(--card-inset);
       backdrop-filter: blur(14px);
     }
 
     .card:hover {
       transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.60), 0 0 38px rgba(232,135,26,0.14);
+      box-shadow: var(--card-shadow-hover);
       background: var(--bg-card-hover);
       border-color: rgba(232,135,26,0.36);
     }
@@ -959,7 +1228,7 @@
     .card-thumb {
       position: relative;
       width: 100%; padding-top: 56.25%;
-      overflow: hidden; background: #1a1a1a;
+      overflow: hidden; background: var(--card-thumb-bg);
     }
 
     .card-thumb img {
@@ -1010,8 +1279,6 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        TRENDING NOW
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    #trending { background: rgba(14,14,14,0.74); }
-
     .trending-grid {
       display: flex;
       flex-direction: column;
@@ -1140,15 +1407,15 @@
     .series-card-bg {
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: brightness(0.35);
+      filter: brightness(0.82) saturate(1.05);
       transition: filter 0.35s, transform 0.4s var(--ease);
     }
 
-    .series-card:hover .series-card-bg { filter: brightness(0.28); transform: scale(1.04); }
+    .series-card:hover .series-card-bg { filter: brightness(0.95) saturate(1.1); transform: scale(1.04); }
 
     .series-card-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 34%, transparent 62%);
     }
 
     .series-card-body {
@@ -1342,10 +1609,395 @@
     }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       CATEGORY SECTIONS (ARY-style: featured + list)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .cat-section { scroll-margin-top: 90px; }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .cat-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: var(--text-primary);
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .cat-header h2::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 5px; height: 24px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--brand-red), var(--brand-orange));
+    }
+
+    .cat-view-all {
+      margin-left: auto;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      transition: gap 0.2s, opacity 0.2s;
+    }
+    .cat-view-all:hover { gap: 9px; opacity: 0.85; }
+    .cat-view-all svg { width: 14px; height: 14px; }
+
+    .cat-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Big featured story (left) */
+    .cat-feature {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .cat-feature-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+
+    .cat-feature-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease);
+    }
+    .cat-feature:hover .cat-feature-thumb img { transform: scale(1.05); }
+
+    .cat-feature-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      color: #fff;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+    }
+
+    .cat-feature-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.28;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .cat-feature:hover .cat-feature-title { color: var(--accent); }
+
+    .cat-feature-excerpt {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* List of small stories (right) */
+    .cat-list { display: flex; flex-direction: column; }
+
+    .cat-item {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.2s;
+    }
+    .cat-item:first-child { padding-top: 0; }
+    .cat-item:last-child { border-bottom: none; }
+    .cat-item:hover { padding-left: 6px; }
+
+    .cat-item-thumb {
+      width: 108px;
+      flex-shrink: 0;
+      aspect-ratio: 16 / 11;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .cat-item-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s var(--ease);
+    }
+    .cat-item:hover .cat-item-thumb img { transform: scale(1.07); }
+
+    .cat-item-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+    .cat-item-tag {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .cat-item-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-primary);
+      transition: color 0.2s;
+    }
+    .cat-item:hover .cat-item-title { color: var(--accent); }
+
+    @media (max-width: 820px) {
+      .cat-layout { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* ════════════════════════════════════════════════
+       SHARED SECTION HEADER (pro newsroom)
+    ════════════════════════════════════════════════ */
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .sec-head-main { display: flex; flex-direction: column; gap: 6px; }
+    .sec-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .sec-kicker::before {
+      content: '';
+      width: 22px; height: 2px;
+      background: linear-gradient(90deg, var(--brand-red), var(--brand-orange));
+    }
+    .sec-h {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--text-primary);
+    }
+    .sec-h span { color: var(--accent); }
+    .sec-head-link {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s, gap 0.2s;
+      padding-bottom: 4px;
+    }
+    .sec-head-link:hover { color: var(--accent); gap: 11px; }
+    .sec-head-link svg { width: 14px; height: 14px; }
+
+    /* ════════════════════════════════════════════════
+       TRENDING — ranking board
+    ════════════════════════════════════════════════ */
+    .tr2-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    /* Lead trending card */
+    .tr2-lead {
+      position: relative;
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      min-height: 420px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.42);
+    }
+    .tr2-lead-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+    .tr2-lead:hover .tr2-lead-img { transform: scale(1.05); }
+    .tr2-lead::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,3,0.94) 6%, rgba(3,3,3,0.35) 44%, transparent 72%); }
+    .tr2-rank-badge {
+      position: absolute; top: 18px; left: 18px; z-index: 3;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px;
+      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(200,21,27,0.4);
+    }
+    .tr2-rank-badge svg { width: 14px; height: 14px; }
+    .tr2-lead-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: clamp(22px, 2.6vw, 34px); }
+    .tr2-lead-cat { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-orange); margin-bottom: 10px; }
+    .tr2-lead-title { font-family: var(--font-display); font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 800; line-height: 1.16; color: #fff; margin-bottom: 12px; text-shadow: 0 4px 24px rgba(0,0,0,0.7); }
+    .tr2-lead-meta { display: flex; align-items: center; gap: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+    .tr2-lead-meta .dot-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.45); }
+
+    /* Ranked list */
+    .tr2-list {
+      display: flex; flex-direction: column;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 4px 20px;
+    }
+    .tr2-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      cursor: pointer; position: relative;
+      transition: padding-left 0.25s var(--ease);
+    }
+    .tr2-item:last-child { border-bottom: none; }
+    .tr2-item:hover { padding-left: 7px; }
+    .tr2-rank {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--border-light);
+      width: 30px; flex-shrink: 0; text-align: center;
+      transition: color 0.25s;
+    }
+    .tr2-item:hover .tr2-rank { color: var(--accent); }
+    .tr2-item-thumb { width: 76px; height: 56px; flex-shrink: 0; border-radius: 9px; overflow: hidden; }
+    .tr2-item-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+    .tr2-item:hover .tr2-item-thumb img { transform: scale(1.08); }
+    .tr2-item-body { flex: 1; min-width: 0; }
+    .tr2-item-cat { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .tr2-item-title {
+      font-size: 0.92rem; font-weight: 600; line-height: 1.34; color: var(--text-primary);
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      transition: color 0.2s;
+    }
+    .tr2-item:hover .tr2-item-title { color: var(--accent); }
+
+    /* ════════════════════════════════════════════════
+       EDITORIAL — magazine spotlight
+    ════════════════════════════════════════════════ */
+    .ed2-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 30px; align-items: start; }
+    .ed2-lead { display: block; cursor: pointer; }
+    .ed2-lead-figure { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; margin-bottom: 20px; }
+    .ed2-lead-figure img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+    .ed2-lead:hover .ed2-lead-figure img { transform: scale(1.05); }
+    .ed2-lead-badge {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      padding: 6px 13px; border-radius: 6px;
+      background: rgba(3,3,3,0.66); backdrop-filter: blur(8px);
+      color: #fff; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+    .ed2-lead-cat { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .ed2-lead-title { font-family: var(--font-display); font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 800; line-height: 1.16; color: var(--text-primary); margin-bottom: 14px; transition: color 0.2s; }
+    .ed2-lead:hover .ed2-lead-title { color: var(--accent); }
+    .ed2-lead-excerpt { font-size: 0.96rem; color: var(--text-secondary); line-height: 1.72; margin-bottom: 16px; }
+    .ed2-lead-meta { display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em; }
+    .ed2-lead-meta .dot-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--border-light); }
+
+    .ed2-list { display: flex; flex-direction: column; gap: 4px; }
+    .ed2-item {
+      display: flex; gap: 16px; align-items: center;
+      padding: 14px 0; border-bottom: 1px solid var(--border-subtle);
+      cursor: pointer; transition: padding-left 0.25s var(--ease);
+    }
+    .ed2-item:last-child { border-bottom: none; }
+    .ed2-item:hover { padding-left: 6px; }
+    .ed2-item-thumb { width: 96px; height: 70px; flex-shrink: 0; border-radius: 10px; overflow: hidden; }
+    .ed2-item-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+    .ed2-item:hover .ed2-item-thumb img { transform: scale(1.08); }
+    .ed2-item-body { flex: 1; min-width: 0; }
+    .ed2-item-cat { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+    .ed2-item-title {
+      font-size: 0.92rem; font-weight: 600; line-height: 1.36; color: var(--text-primary);
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      transition: color 0.2s;
+    }
+    .ed2-item:hover .ed2-item-title { color: var(--accent); }
+
+    /* ════════════════════════════════════════════════
+       GUEST / OPINION — columnist cards
+    ════════════════════════════════════════════════ */
+    .gc2-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .gc2-card {
+      display: flex; flex-direction: column;
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: transform 0.28s var(--ease), border-color 0.28s, box-shadow 0.28s;
+    }
+    .gc2-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--brand-red), var(--brand-orange));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease);
+    }
+    .gc2-card:hover { transform: translateY(-6px); border-color: rgba(232,135,26,0.3); box-shadow: 0 24px 56px rgba(0,0,0,0.34); }
+    .gc2-card:hover::before { transform: scaleX(1); }
+    .gc2-quote { position: absolute; top: 16px; right: 22px; font-family: var(--font-display); font-size: 4.5rem; line-height: 1; color: var(--accent); opacity: 0.1; pointer-events: none; }
+    .gc2-tag { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .gc2-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-bottom: 12px; transition: color 0.2s; }
+    .gc2-card:hover .gc2-title { color: var(--accent); }
+    .gc2-excerpt {
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .gc2-author { display: flex; align-items: center; gap: 13px; padding-top: 18px; border-top: 1px solid var(--border-subtle); }
+    .gc2-avatar {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+      color: #fff; font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+    }
+    .gc2-author-info h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .gc2-author-info span { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── Responsive for the 3 redesigned sections ── */
+    @media (max-width: 900px) {
+      .tr2-grid { grid-template-columns: 1fr; gap: 20px; }
+      .tr2-lead { min-height: 320px; }
+      .ed2-grid { grid-template-columns: 1fr; gap: 26px; }
+      .gc2-grid { grid-template-columns: 1fr; }
+      .sec-head { flex-wrap: wrap; }
+    }
+    @media (max-width: 560px) {
+      .tr2-list, .ed2-list { padding-left: 0; padding-right: 0; }
+      .tr2-list { padding: 4px 14px; }
+      .tr2-rank { font-size: 1.3rem; width: 24px; }
+      .tr2-item-thumb { width: 64px; height: 48px; }
+      .ed2-item-thumb { width: 84px; height: 62px; }
+      .gc2-card { padding: 22px; }
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        GUEST PUBLICATIONS
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    #guest { background: rgba(14,14,14,0.74); }
-
     .guest-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1354,9 +2006,7 @@
 
     .guest-card {
       padding: 28px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03)),
-        rgba(18,18,18,0.88);
+      background: var(--card-bg);
       border-radius: var(--radius-md);
       border: 1px solid var(--border-subtle);
       transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease), box-shadow 0.25s;
@@ -1448,7 +2098,7 @@
 
     .about-img-wrap img {
       width: 100%; height: 400px;
-      object-fit: cover; filter: brightness(0.78);
+      object-fit: cover; filter: brightness(0.9);
     }
 
     .about-badge {
@@ -1503,7 +2153,7 @@
        FOOTER
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     footer {
-      background: #050505;
+      background: var(--sec-3);
       border-top: 1px solid var(--border-subtle);
       padding: 56px var(--section-h-pad) 28px;
     }
@@ -1571,29 +2221,38 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        SCROLL ANIMATIONS
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ── Professional scroll reveal system (clean fade + motion, no blur) ── */
     .reveal {
       opacity: 0;
-      transform: translateY(34px);
+      transform: translateY(30px);
       transition:
-        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
-
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) translateX(0) scale(1);
     }
 
+    /* directional / style variants */
+    .reveal-left   { transform: translateX(-36px); }
+    .reveal-right  { transform: translateX(36px); }
+    .reveal-scale  { transform: scale(0.95); }
+    .reveal-fade   { transform: none; }
+
     .reveal-delay-1 { transition-delay: 0.06s; }
-    .reveal-delay-2 { transition-delay: 0.12s; }
-    .reveal-delay-3 { transition-delay: 0.18s; }
-    .reveal-delay-4 { transition-delay: 0.24s; }
-    .reveal-delay-5 { transition-delay: 0.30s; }
-    .reveal-delay-6 { transition-delay: 0.36s; }
+    .reveal-delay-2 { transition-delay: 0.13s; }
+    .reveal-delay-3 { transition-delay: 0.20s; }
+    .reveal-delay-4 { transition-delay: 0.27s; }
+    .reveal-delay-5 { transition-delay: 0.34s; }
+    .reveal-delay-6 { transition-delay: 0.41s; }
+
+    /* section headings get a refined slide-up */
+    .sec-head.reveal, .section-header.reveal { transform: translateY(22px); }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1609,13 +2268,16 @@
     nav { position: fixed; z-index: 1000 !important; }
     .auth-overlay { z-index: 1999 !important; }
 
-    #latest    { background: rgba(8,8,8,0.68); }
-    #trending  { background: rgba(14,14,14,0.74); }
-    #series    { background: rgba(8,8,8,0.68); }
-    #editorial { background: rgba(5,5,5,0.76); }
-    #guest     { background: rgba(14,14,14,0.74); }
-    #about     { background: rgba(8,8,8,0.76); }
-    footer     { background: rgba(5,5,5,0.96); }
+    #latest    { background: var(--sec-1); }
+    #trending  { background: var(--sec-2); }
+    #series    { background: var(--sec-1); }
+    #editorial { background: var(--sec-3); }
+    #guest     { background: var(--sec-2); }
+    #about     { background: var(--sec-1); }
+    .cat-section:nth-of-type(even) { background: var(--sec-2); }
+    .cat-section:nth-of-type(odd)  { background: var(--sec-1); }
+    footer     { background: var(--sec-3); }
+    section { transition: background 0.45s var(--ease); }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        RESPONSIVE
@@ -1638,16 +2300,11 @@
       .nav-search { width: 180px; height: 36px; }
       .auth-btn { width: 36px; height: 36px; }
       .nav-search input { width: 100%; min-width: 0; }
-      .slider { min-height: 100svh; padding-top: calc(65px + 20px); }
-      .hero-carousel { margin-bottom: 20px; }
-      .hc-card.hc-center { width: min(100% - 48px, 520px); }
-      .hc-card.hc-left,
-      .hc-card.hc-right { width: 0; height: 0; transform: translateX(0) scale(0) !important; opacity: 0; pointer-events: none; }
-      .hc-card.hc-far-left,
-      .hc-card.hc-far-right { display: none; }
-      .hero-info { width: min(100% - 48px, 520px); margin-top: 16px; }
-      .hero-info-title { font-size: clamp(1.4rem, 5vw, 1.8rem); }
-      .hero-info-desc { font-size: 0.9rem; }
+      .theme-toggle { height: 36px; padding: 0 10px; gap: 0; }
+      .theme-toggle-label { display: none; }
+      .slider { min-height: auto; padding-top: calc(65px + 24px); padding-bottom: 40px; }
+      .hero-lead-title { font-size: clamp(1.45rem, 6vw, 1.95rem); }
+      .hero-eyebrow { margin-bottom: 16px; padding-bottom: 12px; }
       .series-grid { grid-template-columns: 1fr; }
       .trending-list { grid-template-columns: 1fr; }
       .editorial-right { grid-template-columns: 1fr; }
@@ -1672,6 +2329,9 @@
 
 <canvas id="bgMap"></canvas>
 
+<!-- ═══ SCROLL PROGRESS ═══════════════════════════════════ -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- ═══ NAVBAR ════════════════════════════════════════════ -->
 <nav>
   <a class="nav-logo" href="#home">
@@ -1681,10 +2341,12 @@
 
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#trending">Trending</a></li>
-    <li><a href="#series">Series</a></li>
-    <li><a href="#editorial">Editions</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#cat-pakistan">Pakistan</a></li>
+    <li><a href="#cat-international">World</a></li>
+    <li><a href="#cat-business">Business</a></li>
+    <li><a href="#cat-sports">Sports</a></li>
+    <li><a href="#cat-scitech">Sci-Tech</a></li>
+    <li><a href="#cat-entertainment">Entertainment</a></li>
   </ul>
 
   <div class="nav-right">
@@ -1694,6 +2356,11 @@
       </svg>
       <input type="text" placeholder="Search ZTC stories, videos, series..." />
     </div>
+
+    <button class="theme-toggle" id="themeToggle" onclick="cycleTheme()" title="Switch theme" aria-label="Switch theme">
+      <span class="theme-toggle-icon" id="themeIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg></span>
+      <span class="theme-toggle-label" id="themeLabel">Night</span>
+    </button>
 
     <div class="auth-wrap" id="authWrap">
       <button class="auth-btn" id="authBtn" onclick="toggleAuthDropdown()" title="Sign in">
@@ -1749,96 +2416,103 @@
 
 <div class="auth-overlay" id="authOverlay" onclick="closeAuthDropdown()"></div>
 
-<!-- ═══ HERO SLIDER ═══════════════════════════════════════ -->
+<!-- ═══ HERO — AL JAZEERA STYLE ═══════════════════════════ -->
 <div class="slider" id="home">
 
-  <div class="hero-carousel" id="heroCarousel">
-    <a class="hc-card hc-far-left" data-idx="0" href="https://youtu.be/wsnusXfK7a4?si=nFgPaaeogcmdYyaY" target="_blank" data-tag="Real Story" data-title="The Goat Life Movie" data-desc="A gripping true story of survival and resilience in the deserts of Saudi Arabia.">
-      <div class="hc-thumb">
-        <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
-        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-        <div class="hc-category-badge">Real Story</div>
-      </div>
-      <div class="hc-body">
-        <div class="hc-tag">Real Story</div>
-        <div class="hc-title">The Goat Life Movie</div>
-      </div>
-    </a>
+  <div class="hero-aj" id="heroAJ"
+       data-leads='[
+         {"cat":"International","title":"US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain","excerpt":"The US military reported that Iran fired seven missiles targeting Kuwait and Bahrain, sharply escalating tensions across the Gulf region as governments scramble to respond.","img":"https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg","href":"#"},
+         {"cat":"International","title":"Lebanese Soldiers Killed in Israeli Strike, Says Army","excerpt":"The Lebanese army confirmed casualties among its soldiers following an Israeli strike on its territory, drawing international condemnation.","img":"https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg","href":"#"},
+         {"cat":"Pakistan","title":"PM Orders Legislation for Establishment of Commercial Courts","excerpt":"The Prime Minister has directed authorities to draft legislation establishing dedicated commercial courts to speed up the resolution of business disputes.","img":"https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/FotoJet-75-1.jpg","href":"#"}
+       ]'>
 
-    <a class="hc-card hc-left" data-idx="1" href="https://youtu.be/ZzVfCcOZe34?si=NvK-Gjf9ctWLs7Zf" target="_blank" data-tag="World" data-title="Saudi Arabia's Future Without Oil" data-desc="As oil reserves dwindle, what does the future hold for the kingdom?">
-      <div class="hc-thumb">
-        <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future Without Oil" />
-        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-        <div class="hc-category-badge">World</div>
-      </div>
-      <div class="hc-body">
-        <div class="hc-tag">World</div>
-        <div class="hc-title">Saudi Arabia's Future Without Oil</div>
-      </div>
-    </a>
+    <!-- Eyebrow -->
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-live">Live</span>
+      <span class="hero-eyebrow-date">Saturday, June 6, 2026</span>
+      <span class="hero-eyebrow-rule"></span>
+    </div>
 
-    <a class="hc-card hc-center" data-idx="2" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank" data-tag="Pakistan" data-title="Azad Kashmir Hydropower Projects" data-desc="Exploring the ambitious hydroelectric infrastructure transforming the region.">
-      <div class="hc-thumb">
-        <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
-        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-        <div class="hc-category-badge">Pakistan</div>
-      </div>
-      <div class="hc-body">
-        <div class="hc-tag">Pakistan</div>
-        <div class="hc-title">Azad Kashmir Hydropower Projects</div>
-      </div>
-    </a>
+    <!-- Main grid: lead + live feed -->
+    <div class="hero-main">
 
-    <a class="hc-card hc-right" data-idx="3" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank" data-tag="Politics" data-title="Pakistan's Political Map" data-desc="Understanding the political shifts reshaping the nation's future.">
-      <div class="hc-thumb">
-        <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
-        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-        <div class="hc-category-badge">Politics</div>
-      </div>
-      <div class="hc-body">
-        <div class="hc-tag">Politics</div>
-        <div class="hc-title">Pakistan's Political Map</div>
-      </div>
-    </a>
+      <!-- LEAD STORY -->
+      <a class="hero-lead" id="heroLead" href="#">
+        <img class="hero-lead-img" id="heroLeadImg" src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Lead story" />
+        <div class="hero-lead-body">
+          <div class="hero-lead-tags">
+            <span class="hero-lead-breaking">Breaking</span>
+            <span class="hero-lead-cat" id="heroLeadCat">International</span>
+          </div>
+          <h1 class="hero-lead-title" id="heroLeadTitle">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</h1>
+          <p class="hero-lead-excerpt" id="heroLeadExcerpt">The US military reported that Iran fired seven missiles targeting Kuwait and Bahrain, sharply escalating tensions across the Gulf region as governments scramble to respond.</p>
+          <span class="hero-lead-cta">
+            Read Full Story
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </span>
+        </div>
+      </a>
 
-    <a class="hc-card hc-far-right" data-idx="4" href="https://youtu.be/ji1wdBQwNGg?si=N3OC72R-UzUN9IDu" target="_blank" data-tag="Featured" data-title="Stories That Change How You See the World" data-desc="ZTC Media delivers investigative journalism that reshapes perspectives.">
-      <div class="hc-thumb">
-        <img src="https://img.youtube.com/vi/ji1wdBQwNGg/maxresdefault.jpg" alt="ZTC Exclusive" />
-        <span class="hc-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.52)"/><path d="M28 22l22 12-22 12V22z" fill="white"/></svg></span>
-        <div class="hc-category-badge">Featured</div>
+      <!-- LIVE FEED -->
+      <div class="hero-feed">
+        <div class="hero-feed-head">
+          <h3>Live Updates</h3>
+          <a class="hero-feed-all" href="#">All news</a>
+        </div>
+        <a class="hero-feed-item is-active" data-idx="0" href="#">
+          <div class="hero-feed-time">2 min ago</div>
+          <div class="hero-feed-title">US military says Iran launched 7 missiles at Kuwait, Bahrain</div>
+        </a>
+        <a class="hero-feed-item" data-idx="1" href="#">
+          <div class="hero-feed-time">18 min ago</div>
+          <div class="hero-feed-title">Lebanese soldiers killed in Israeli strike, says army</div>
+        </a>
+        <a class="hero-feed-item" data-idx="2" href="#">
+          <div class="hero-feed-time">41 min ago</div>
+          <div class="hero-feed-title">PM orders legislation for establishment of commercial courts</div>
+        </a>
+        <a class="hero-feed-item" href="#">
+          <div class="hero-feed-time">1 hr ago</div>
+          <div class="hero-feed-title">AJK govt bans Joint Awami Action Committee, notification issued</div>
+        </a>
+        <a class="hero-feed-item" href="#">
+          <div class="hero-feed-time">2 hrs ago</div>
+          <div class="hero-feed-title">Rana Sana backs new administrative units, empowered local govt</div>
+        </a>
       </div>
-      <div class="hc-body">
-        <div class="hc-tag">Featured</div>
-        <div class="hc-title">ZTC Media Exclusive</div>
-      </div>
-    </a>
+    </div>
 
-    <button class="slider-arrow prev" onclick="changeSlide(-1)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="slider-arrow next" onclick="changeSlide(1)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-
-  <div class="hero-info">
-    <div class="hero-info-content">
-      <div class="hero-info-tag"></div>
-      <h2 class="hero-info-title"></h2>
-      <p class="hero-info-desc"></p>
-      <a class="hero-info-cta" href="#" target="_blank">
-        <span>Watch Now</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <!-- SECONDARY CARDS -->
+    <div class="hero-secondary">
+      <a class="hero-sec-card" href="#">
+        <div class="hero-sec-thumb">
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="" />
+          <span class="hero-sec-cat">Pakistan</span>
+        </div>
+        <div class="hero-sec-body"><div class="hero-sec-title">AJK Govt Bans Joint Awami Action Committee, Notification Issued</div></div>
+      </a>
+      <a class="hero-sec-card" href="#">
+        <div class="hero-sec-thumb">
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="" />
+          <span class="hero-sec-cat">Business</span>
+        </div>
+        <div class="hero-sec-body"><div class="hero-sec-title">How to Get Cheap Electricity Through Pakistan's Solar Wheeling Policy</div></div>
+      </a>
+      <a class="hero-sec-card" href="#">
+        <div class="hero-sec-thumb">
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="" />
+          <span class="hero-sec-cat">Business</span>
+        </div>
+        <div class="hero-sec-body"><div class="hero-sec-title">Petrol Price in Pakistan — June 06, 2026</div></div>
+      </a>
+      <a class="hero-sec-card" href="#">
+        <div class="hero-sec-thumb">
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/rana-sana.jpg" alt="" />
+          <span class="hero-sec-cat">Pakistan</span>
+        </div>
+        <div class="hero-sec-body"><div class="hero-sec-title">Rana Sana Backs New Administrative Units, Empowered Local Govt</div></div>
       </a>
     </div>
-  </div>
-
-  <div class="slider-dots" id="sliderDots">
-    <button class="dot active" onclick="goToSlide(0)"></button>
-    <button class="dot" onclick="goToSlide(1)"></button>
-    <button class="dot" onclick="goToSlide(2)"></button>
-    <button class="dot" onclick="goToSlide(3)"></button>
-    <button class="dot" onclick="goToSlide(4)"></button>
   </div>
 
   <div class="hero-scroll-hint">
@@ -1862,148 +2536,148 @@
     <div class="carousel-track" id="carouselTrack">
 
       <!-- SET 1 -->
-      <a class="card card--carousel" href="https://youtu.be/wsnusXfK7a4?si=QSMhf4Pg7RvQ00k1" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="Petrol Price Pakistan" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-realstory">Real Story</div>
-          <div class="card-title">The Goat Life Movie | The Reality Of Saudi Arabia</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-pakistan">Business</div>
+          <div class="card-title">Petrol Price in Pakistan — June 06, 2026</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/rana-sana.jpg" alt="Rana Sanaullah" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
           <div class="card-tag tag-pakistan">Pakistan</div>
-          <div class="card-title">Azad Kashmir's Hydropower Projects: Progress or Destruction?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-title">Rana Sana Backs New Administrative Units, Empowered Local Govt</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg" alt="Lebanon Strike" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-parenting">Parenting</div>
-          <div class="card-title">The Dark Truth About Mobile Phones and Kids</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">International</div>
+          <div class="card-title">Lebanese Soldiers Killed in Israeli Strike, Says Army</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Iran Missiles" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-politics">Politics</div>
-          <div class="card-title">Is Pakistan's New Political Map a Game Changer?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">International</div>
+          <div class="card-title">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="AJK Govt" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-history">History</div>
-          <div class="card-title">Where Did the Idea of Pyramids Come From?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-politics">Pakistan</div>
+          <div class="card-title">AJK Govt Bans Joint Awami Action Committee</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/ZzVfCcOZe34?si=pJpepdAsn1M3uHSd" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Solar Wheeling" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-world">World</div>
-          <div class="card-title">Saudi Arabia's Future Without Oil — What's Next?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">Business</div>
+          <div class="card-title">Cheap Electricity Through Pakistan's Solar Wheeling Policy</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
       <!-- SET 2 (duplicate for loop) -->
-      <a class="card card--carousel" href="https://youtu.be/wsnusXfK7a4?si=QSMhf4Pg7RvQ00k1" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="The Goat Life Movie" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="Petrol Price Pakistan" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-realstory">Real Story</div>
-          <div class="card-title">The Goat Life Movie | The Reality Of Saudi Arabia</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-pakistan">Business</div>
+          <div class="card-title">Petrol Price in Pakistan — June 06, 2026</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/wFS-RFNDZ0c?si=zqvx1uZv68YKVNaS" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir Hydropower" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/rana-sana.jpg" alt="Rana Sanaullah" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
           <div class="card-tag tag-pakistan">Pakistan</div>
-          <div class="card-title">Azad Kashmir's Hydropower Projects: Progress or Destruction?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-title">Rana Sana Backs New Administrative Units, Empowered Local Govt</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/tvlYzyeY6D0?si=Od9OeBI6LYaZmWPl" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/tvlYzyeY6D0/maxresdefault.jpg" alt="Mobile Phones and Kids" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg" alt="Lebanon Strike" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-parenting">Parenting</div>
-          <div class="card-title">The Dark Truth About Mobile Phones and Kids</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">International</div>
+          <div class="card-title">Lebanese Soldiers Killed in Israeli Strike, Says Army</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/PFFOeNNTgVc?si=WvqOoKV2_YAZIPkH" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Pakistan Political Map" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Iran Missiles" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-politics">Politics</div>
-          <div class="card-title">Is Pakistan's New Political Map a Game Changer?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">International</div>
+          <div class="card-title">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/C5-qkOqN-Vg?si=CnZmVmhj7BiHCk0o" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Idea of Pyramids" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="AJK Govt" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-history">History</div>
-          <div class="card-title">Where Did the Idea of Pyramids Come From?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-politics">Pakistan</div>
+          <div class="card-title">AJK Govt Bans Joint Awami Action Committee</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
-      <a class="card card--carousel" href="https://youtu.be/ZzVfCcOZe34?si=pJpepdAsn1M3uHSd" target="_blank">
+      <a class="card card--carousel" href="#">
         <div class="card-thumb">
-          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia Future" />
+          <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Solar Wheeling" />
           <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
         </div>
         <div class="card-body">
-          <div class="card-tag tag-world">World</div>
-          <div class="card-title">Saudi Arabia's Future Without Oil — What's Next?</div>
-          <div class="card-meta"><span>ZTC Media</span></div>
+          <div class="card-tag tag-world">Business</div>
+          <div class="card-title">Cheap Electricity Through Pakistan's Solar Wheeling Policy</div>
+          <div class="card-meta"><span>ARY News</span></div>
         </div>
       </a>
 
@@ -2013,71 +2687,66 @@
 
 <!-- ═══ TRENDING NOW ═══════════════════════════════════════ -->
 <section id="trending">
-  <div class="section-header reveal">
-    <div class="section-rule"></div>
-    <h2 class="section-title">Trending <span>Now</span></h2>
+  <div class="sec-head reveal">
+    <div class="sec-head-main">
+      <span class="sec-kicker">Most Read</span>
+      <h2 class="sec-h">Trending <span>Now</span></h2>
+    </div>
+    <a class="sec-head-link" href="#">
+      View all
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
   </div>
 
-  <div class="trending-grid">
-    <a class="card card--feature reveal reveal-delay-1" href="article.html">
-      <div class="card-thumb">
-        <img src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="Goat Life" />
-        <div class="card-play"><svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.5)"/><path d="M27 22l22 12-22 12V22z" fill="white"/></svg></div>
-        <span class="trending-badge">#1 Trending</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tag tag-realstory">Real Story · ZTC Investigates</div>
-        <div class="card-title">The Goat Life — A Real Story of Survival in the Saudi Desert</div>
-        <div class="card-meta"><span>ZTC Media</span><span>Most Watched</span></div>
+  <div class="tr2-grid">
+    <!-- Lead -->
+    <a class="tr2-lead reveal reveal-delay-1" href="#">
+      <img class="tr2-lead-img" src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Iran Missiles" />
+      <span class="tr2-rank-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+        #1 Trending
+      </span>
+      <div class="tr2-lead-body">
+        <div class="tr2-lead-cat">International · Breaking</div>
+        <div class="tr2-lead-title">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</div>
+        <div class="tr2-lead-meta"><span>ARY News</span><span class="dot-sep"></span><span>Most Read Today</span></div>
       </div>
     </a>
 
-    <div class="trending-list reveal reveal-delay-2">
-
-      <a class="trending-item" href="https://youtu.be/ZzVfCcOZe34" target="_blank">
-        <div class="trending-item-thumb">
-          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia" />
-          <span class="trending-rank">#2</span>
-        </div>
-        <div class="trending-item-body">
-          <div class="trending-item-tag tag-world">World</div>
-          <div class="trending-item-title">Saudi Arabia's Future Without Oil</div>
+    <!-- Ranked list -->
+    <div class="tr2-list reveal reveal-delay-2">
+      <a class="tr2-item" href="#">
+        <span class="tr2-rank">2</span>
+        <div class="tr2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg" alt="Lebanon Strike" /></div>
+        <div class="tr2-item-body">
+          <div class="tr2-item-cat">International</div>
+          <div class="tr2-item-title">Lebanese Soldiers Killed in Israeli Strike, Says Army</div>
         </div>
       </a>
-
-      <a class="trending-item" href="https://youtu.be/wFS-RFNDZ0c" target="_blank">
-        <div class="trending-item-thumb">
-          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir" />
-          <span class="trending-rank">#3</span>
-        </div>
-        <div class="trending-item-body">
-          <div class="trending-item-tag tag-pakistan">Pakistan</div>
-          <div class="trending-item-title">Azad Kashmir's Hydropower: Progress or Destruction?</div>
+      <a class="tr2-item" href="#">
+        <span class="tr2-rank">3</span>
+        <div class="tr2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="AJK Govt" /></div>
+        <div class="tr2-item-body">
+          <div class="tr2-item-cat">Pakistan</div>
+          <div class="tr2-item-title">AJK Govt Bans Joint Awami Action Committee</div>
         </div>
       </a>
-
-      <a class="trending-item" href="https://youtu.be/PFFOeNNTgVc" target="_blank">
-        <div class="trending-item-thumb">
-          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Political Map" />
-          <span class="trending-rank">#4</span>
-        </div>
-        <div class="trending-item-body">
-          <div class="trending-item-tag tag-politics">Politics</div>
-          <div class="trending-item-title">Pakistan's New Political Map — A Game Changer?</div>
+      <a class="tr2-item" href="#">
+        <span class="tr2-rank">4</span>
+        <div class="tr2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/FotoJet-75-1.jpg" alt="Commercial Courts" /></div>
+        <div class="tr2-item-body">
+          <div class="tr2-item-cat">Pakistan</div>
+          <div class="tr2-item-title">PM Orders Legislation for Establishment of Commercial Courts</div>
         </div>
       </a>
-
-      <a class="trending-item" href="https://youtu.be/C5-qkOqN-Vg" target="_blank">
-        <div class="trending-item-thumb">
-          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Pyramids" />
-          <span class="trending-rank">#5</span>
-        </div>
-        <div class="trending-item-body">
-          <div class="trending-item-tag tag-history">History</div>
-          <div class="trending-item-title">Where Did the Idea of Pyramids Come From?</div>
+      <a class="tr2-item" href="#">
+        <span class="tr2-rank">5</span>
+        <div class="tr2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="Petrol Price" /></div>
+        <div class="tr2-item-body">
+          <div class="tr2-item-cat">Business</div>
+          <div class="tr2-item-title">Petrol Price in Pakistan — June 06, 2026</div>
         </div>
       </a>
-
     </div>
   </div>
 </section>
@@ -2162,141 +2831,361 @@
 
 <!-- ═══ EDITORIAL SPOTLIGHT ════════════════════════════════ -->
 <section id="editorial">
-  <div class="section-header reveal">
-    <div class="section-rule"></div>
-    <h2 class="section-title">Editorial <span>Spotlight</span></h2>
+  <div class="sec-head reveal">
+    <div class="sec-head-main">
+      <span class="sec-kicker">In Depth</span>
+      <h2 class="sec-h">Editorial <span>Spotlight</span></h2>
+    </div>
+    <a class="sec-head-link" href="#">
+      More analysis
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
   </div>
 
-  <div class="editorial-layout reveal">
-
-    <div class="editorial-left">
-      <div class="editorial-featured-tag">Featured Investigation</div>
-      <img class="editorial-featured-img" src="https://img.youtube.com/vi/wsnusXfK7a4/maxresdefault.jpg" alt="Featured" />
-      <a href="article.html" style="text-decoration:none;">
-        <div class="editorial-featured-title">The Goat Life: A True Account of a Man Stripped of His Freedom in the Arabian Desert</div>
-      </a>
-      <p class="editorial-featured-excerpt">
-        Aadu Jeevitham — the true story of a Pakistani migrant worker who found himself enslaved in the Saudi desert with no way out. ZTC investigates the systemic failures that allow modern-day slavery to persist in the Gulf states.
-      </p>
-      <div class="editorial-featured-meta">
-        <span>ZTC Investigates</span>
-        <span style="color: var(--border-light)">·</span>
-        <span>Real Story</span>
-        <span style="color: var(--border-light)">·</span>
-        <span>Long-form</span>
+  <div class="ed2-grid">
+    <!-- Lead editorial -->
+    <a class="ed2-lead reveal reveal-delay-1" href="#">
+      <div class="ed2-lead-figure">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Solar Wheeling Policy" />
+        <span class="ed2-lead-badge">Featured</span>
       </div>
+      <div class="ed2-lead-cat">Business · Analysis</div>
+      <div class="ed2-lead-title">How to Get Cheap Electricity Through Pakistan's Solar Wheeling Policy</div>
+      <p class="ed2-lead-excerpt">The federal government plans to roll out an Energy Wheeling Policy that would allow consumers and businesses to source cheaper electricity directly from solar producers through the national grid — a move that could reshape Pakistan's power market for years to come.</p>
+      <div class="ed2-lead-meta"><span>ARY News</span><span class="dot-sep"></span><span>In Depth</span><span class="dot-sep"></span><span>6 min read</span></div>
+    </a>
+
+    <!-- Side editorials -->
+    <div class="ed2-list reveal reveal-delay-2">
+      <a class="ed2-item" href="#">
+        <div class="ed2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Iran Missiles" /></div>
+        <div class="ed2-item-body">
+          <div class="ed2-item-cat">International</div>
+          <div class="ed2-item-title">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</div>
+        </div>
+      </a>
+      <a class="ed2-item" href="#">
+        <div class="ed2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="AJK Govt" /></div>
+        <div class="ed2-item-body">
+          <div class="ed2-item-cat">Pakistan</div>
+          <div class="ed2-item-title">AJK Govt Bans Joint Awami Action Committee, Notification Issued</div>
+        </div>
+      </a>
+      <a class="ed2-item" href="#">
+        <div class="ed2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/FotoJet-75-1.jpg" alt="Commercial Courts" /></div>
+        <div class="ed2-item-body">
+          <div class="ed2-item-cat">Pakistan</div>
+          <div class="ed2-item-title">PM Orders Legislation for Establishment of Commercial Courts</div>
+        </div>
+      </a>
+      <a class="ed2-item" href="#">
+        <div class="ed2-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/rana-sana.jpg" alt="Rana Sanaullah" /></div>
+        <div class="ed2-item-body">
+          <div class="ed2-item-cat">Governance</div>
+          <div class="ed2-item-title">Rana Sana Backs New Administrative Units, Empowered Local Govt System</div>
+        </div>
+      </a>
     </div>
+  </div>
+</section>
 
-    <div class="editorial-right">
-
-      <a class="editorial-story" href="https://youtu.be/ZzVfCcOZe34" target="_blank">
-        <div class="editorial-story-img">
-          <img src="https://img.youtube.com/vi/ZzVfCcOZe34/maxresdefault.jpg" alt="Saudi Arabia" />
-        </div>
-        <div class="editorial-story-body">
-          <div class="editorial-story-tag tag-world">World Affairs</div>
-          <div class="editorial-story-title">Saudi Arabia's Transition Away from Oil — and What It Means for the World</div>
-          <div class="editorial-story-meta">ZTC Analysis · In Depth</div>
-        </div>
+<!-- ═══ PAKISTAN ══════════════════════════════════════════ -->
+<section class="cat-section" id="cat-pakistan">
+  <div class="cat-header reveal">
+    <h2>Pakistan</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/FotoJet-75-1.jpg" alt="Commercial Courts" />
+        <span class="cat-feature-badge">Pakistan</span>
+      </div>
+      <div class="cat-feature-title">PM Orders Legislation for Establishment of Commercial Courts</div>
+      <p class="cat-feature-excerpt">The Prime Minister has directed authorities to draft legislation establishing dedicated commercial courts to speed up the resolution of business disputes across the country.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/AJK-govt-2.jpg" alt="AJK" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Pakistan</div><div class="cat-item-title">AJK Govt Bans Joint Awami Action Committee, Notification Issued</div></div>
       </a>
-
-      <a class="editorial-story" href="https://youtu.be/wFS-RFNDZ0c" target="_blank">
-        <div class="editorial-story-img">
-          <img src="https://img.youtube.com/vi/wFS-RFNDZ0c/maxresdefault.jpg" alt="Azad Kashmir" />
-        </div>
-        <div class="editorial-story-body">
-          <div class="editorial-story-tag tag-pakistan">Pakistan</div>
-          <div class="editorial-story-title">Azad Kashmir's Mega Hydropower Projects: Who Really Benefits?</div>
-          <div class="editorial-story-meta">ZTC Pakistan · Investigation</div>
-        </div>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/rana-sana.jpg" alt="Rana Sana" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Pakistan</div><div class="cat-item-title">Rana Sana Backs New Administrative Units, Empowered Local Govt System</div></div>
       </a>
-
-      <a class="editorial-story" href="https://youtu.be/PFFOeNNTgVc" target="_blank">
-        <div class="editorial-story-img">
-          <img src="https://img.youtube.com/vi/PFFOeNNTgVc/maxresdefault.jpg" alt="Political Map" />
-        </div>
-        <div class="editorial-story-body">
-          <div class="editorial-story-tag tag-politics">Politics</div>
-          <div class="editorial-story-title">Pakistan's Redrawn Political Map — Sovereignty, Strategy or Spectacle?</div>
-          <div class="editorial-story-meta">ZTC Politics · Analysis</div>
-        </div>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="Petrol" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">Petrol Price in Pakistan — June 06, 2026</div></div>
       </a>
-
-      <a class="editorial-story" href="https://youtu.be/C5-qkOqN-Vg" target="_blank">
-        <div class="editorial-story-img">
-          <img src="https://img.youtube.com/vi/C5-qkOqN-Vg/maxresdefault.jpg" alt="Pyramids" />
-        </div>
-        <div class="editorial-story-body">
-          <div class="editorial-story-tag tag-history">History</div>
-          <div class="editorial-story-title">The Origin of the Pyramid — Architecture, Astronomy or Obsession?</div>
-          <div class="editorial-story-meta">ZTC History · Documentary</div>
-        </div>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Solar" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">How to Get Cheap Electricity Through Pakistan's Solar Wheeling Policy</div></div>
       </a>
-
     </div>
+  </div>
+</section>
 
+<!-- ═══ INTERNATIONAL ═════════════════════════════════════ -->
+<section class="cat-section" id="cat-international">
+  <div class="cat-header reveal">
+    <h2>World</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Iran Missiles" />
+        <span class="cat-feature-badge">International</span>
+      </div>
+      <div class="cat-feature-title">US Military Says Iran Launched 7 Missiles at Kuwait, Bahrain</div>
+      <p class="cat-feature-excerpt">The US military reported that Iran fired seven missiles targeting Kuwait and Bahrain, sharply escalating tensions across the Gulf region as governments scramble to respond.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg" alt="Lebanon" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">International</div><div class="cat-item-title">Lebanese Soldiers Killed in Israeli Strike, Says Army</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/Kuwait.jpg" alt="Gulf" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">International</div><div class="cat-item-title">Gulf States on High Alert Amid Rising Regional Tensions</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/05/Israeli-strikes-Lebanon.jpg" alt="Beaufort" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">International</div><div class="cat-item-title">Two Palestinian Fighters Recount the Battle for Lebanon's Beaufort Castle</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/FotoJet-75-1.jpg" alt="Tehran" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">International</div><div class="cat-item-title">Mohsin Naqvi to Visit Tehran as Pakistan Pushes for US-Iran Deal</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUSINESS ══════════════════════════════════════════ -->
+<section class="cat-section" id="cat-business">
+  <div class="cat-header reveal">
+    <h2>Business</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Solar Wheeling" />
+        <span class="cat-feature-badge">Business</span>
+      </div>
+      <div class="cat-feature-title">How to Get Cheap Electricity Through Pakistan's Solar Wheeling Policy</div>
+      <p class="cat-feature-excerpt">The federal government plans an Energy Wheeling Policy initiative allowing consumers to access cheaper electricity directly from solar producers, potentially reshaping the power market.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="Petrol" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">Petrol Price in Pakistan — June 06, 2026</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/FotoJet-75-1.jpg" alt="Tax" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">Govt Announces Tax Relief Measures Ahead of Federal Budget</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/sasasasas.jpg" alt="Gold" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">Gold Prices Surge to Record High in Local Markets</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/04/petrol-price.jpg" alt="FTSE" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Business</div><div class="cat-item-title">FTSE Closes Higher as Global Markets Steady After Volatile Week</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPORTS ════════════════════════════════════════════ -->
+<section class="cat-section" id="cat-sports">
+  <div class="cat-header reveal">
+    <h2>Sports</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/1-25.jpg" alt="India Test" />
+        <span class="cat-feature-badge">Sports</span>
+      </div>
+      <div class="cat-feature-title">Gill, Rahul Tons Power India to 368-3 in Afghanistan Test</div>
+      <p class="cat-feature-excerpt">Centuries from Shubman Gill and KL Rahul put India in a commanding position, reaching 368 for 3 on day one of the Test against Afghanistan.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/03/ezgif.com-resize-22.webp" alt="Sarfaraz" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Cricket</div><div class="cat-item-title">Sarfaraz to Be Replaced by Ex-Captain as Head Coach: Report</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/1-28.jpg" alt="Andreeva" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Tennis</div><div class="cat-item-title">Andreeva Beats Chwalinska to Win French Open Title</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/03/1-158.jpg" alt="Antonelli" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Formula 1</div><div class="cat-item-title">Antonelli Leads Ferraris in Monaco F1 Final Practice</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2026/06/1-26.jpg" alt="Doubles" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Tennis</div><div class="cat-item-title">Granollers and Zeballos Retain French Open Men's Doubles Title</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCIENCE & TECH ════════════════════════════════════ -->
+<section class="cat-section" id="cat-scitech">
+  <div class="cat-header reveal">
+    <h2>Sci-Tech</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/Longest-name.jpg" alt="Ocean Species" />
+        <span class="cat-feature-badge">Sci-Tech</span>
+      </div>
+      <div class="cat-feature-title">Haul of 1,100 New Ocean Species in One Year Shows Depths of Unknown</div>
+      <p class="cat-feature-excerpt">Scientists documented more than 1,100 previously unknown ocean species in a single year, underscoring how much of the deep sea remains unexplored.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/pp.jpg" alt="Black Hole" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Science</div><div class="cat-item-title">Astronomers Capture Rare Image of Supermassive Black Hole</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/gabriel.jpg" alt="Chrome AI" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Technology</div><div class="cat-item-title">Google Rolls Out New Chrome AI Features for Smarter Browsing</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/Longest-name.jpg" alt="NASA" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Science</div><div class="cat-item-title">NASA Unveils Next-Generation Mission to Explore Outer Solar System</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/pp.jpg" alt="Smart TV" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Technology</div><div class="cat-item-title">Researchers Warn of Security Risks in Popular Smart TVs</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENTERTAINMENT ═════════════════════════════════════ -->
+<section class="cat-section" id="cat-entertainment">
+  <div class="cat-header reveal">
+    <h2>Entertainment</h2>
+    <a class="cat-view-all" href="#">
+      View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+  <div class="cat-layout reveal">
+    <a class="cat-feature" href="#">
+      <div class="cat-feature-thumb">
+        <img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/alba.jpg" alt="Jessica Alba" />
+        <span class="cat-feature-badge">Entertainment</span>
+      </div>
+      <div class="cat-feature-title">Jessica Alba Soft-Launches Boyfriend Danny Ramirez in Australia Getaway Photos</div>
+      <p class="cat-feature-excerpt">The actress shared dreamy holiday snapshots from Australia, appearing to confirm her relationship with actor Danny Ramirez for the first time.</p>
+    </a>
+    <div class="cat-list">
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2024/07/taylor-swift.jpg" alt="Taylor Swift" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Showbiz</div><div class="cat-item-title">Taylor Swift Reacts to Selena Gomez's Engagement to Benny Blanco</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/09/Momal-Sheikh.jpg" alt="Momal" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Showbiz</div><div class="cat-item-title">Pakistan Would Be Victorious Against India in Final: Momal Sheikh</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/pp.jpg" alt="Royal Baby" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Lifestyle</div><div class="cat-item-title">Luxembourg Royal Family Welcomes New Baby Days After Guillaume Becomes Grand Duke</div></div>
+      </a>
+      <a class="cat-item" href="#">
+        <div class="cat-item-thumb"><img src="https://static.arynews.tv/zip-archives/wp-content/uploads/2025/10/Longest-name.jpg" alt="Longest Name" /></div>
+        <div class="cat-item-body"><div class="cat-item-tag">Off Beat</div><div class="cat-item-title">Meet the Man Whose 2,253-Word Name Takes 20 Minutes to Recite</div></div>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ═══ GUEST PUBLICATIONS ════════════════════════════════ -->
 <section id="guest">
-  <div class="section-header reveal">
-    <div class="section-rule"></div>
-    <h2 class="section-title">Guest <span>Contributions</span></h2>
+  <div class="sec-head reveal">
+    <div class="sec-head-main">
+      <span class="sec-kicker">Voices</span>
+      <h2 class="sec-h">Opinion &amp; <span>Columns</span></h2>
+    </div>
+    <a class="sec-head-link" href="#">
+      All columns
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
   </div>
 
-  <div class="guest-grid">
+  <div class="gc2-grid">
 
-    <a class="guest-card reveal reveal-delay-1" href="#">
-      <div class="guest-card-header">
-        <div class="guest-avatar">A</div>
-        <div class="guest-author-info">
+    <a class="gc2-card reveal reveal-delay-1" href="#">
+      <span class="gc2-quote">&ldquo;</span>
+      <div class="gc2-tag">Opinion · Politics</div>
+      <div class="gc2-title">Why Pakistan's Democratic Institutions Continue to Fail Its Citizens</div>
+      <p class="gc2-excerpt">A deep look at the structural failures embedded within Pakistan's legislature, judiciary, and civil service — and what a meaningful reform agenda would actually require to change course.</p>
+      <div class="gc2-author">
+        <div class="gc2-avatar">A</div>
+        <div class="gc2-author-info">
           <h4>Ahmad Raza</h4>
           <span>Political Analyst · Islamabad</span>
         </div>
       </div>
-      <div class="guest-card-title">Why Pakistan's Democratic Institutions Continue to Fail Its Citizens</div>
-      <p class="guest-card-excerpt">A deep look at the structural failures embedded within Pakistan's legislature, judiciary, and civil service — and what a meaningful reform agenda would actually require.</p>
-      <div class="guest-card-tag tag-politics">Opinion · Politics</div>
     </a>
 
-    <a class="guest-card reveal reveal-delay-2" href="#">
-      <div class="guest-card-header">
-        <div class="guest-avatar">S</div>
-        <div class="guest-author-info">
+    <a class="gc2-card reveal reveal-delay-2" href="#">
+      <span class="gc2-quote">&ldquo;</span>
+      <div class="gc2-tag">Analysis · Economy</div>
+      <div class="gc2-title">The Real Cost of Debt-Financed Infrastructure in the Global South</div>
+      <p class="gc2-excerpt">Infrastructure funded by external debt promises progress — but the repayment burden often reshapes the economic sovereignty of developing nations in ways that are rarely discussed openly.</p>
+      <div class="gc2-author">
+        <div class="gc2-avatar">S</div>
+        <div class="gc2-author-info">
           <h4>Sara Mehmood</h4>
           <span>Development Economist · Lahore</span>
         </div>
       </div>
-      <div class="guest-card-title">The Real Cost of Debt-Financed Infrastructure in the Global South</div>
-      <p class="guest-card-excerpt">Infrastructure funded by external debt promises progress — but the repayment burden often reshapes the economic sovereignty of developing nations in ways that are rarely discussed openly.</p>
-      <div class="guest-card-tag">Analysis · Economy</div>
     </a>
 
-    <a class="guest-card reveal reveal-delay-3" href="#">
-      <div class="guest-card-header">
-        <div class="guest-avatar">K</div>
-        <div class="guest-author-info">
+    <a class="gc2-card reveal reveal-delay-3" href="#">
+      <span class="gc2-quote">&ldquo;</span>
+      <div class="gc2-tag">Investigation · Human Rights</div>
+      <div class="gc2-title">The Gulf's Labour Migration System: Reform or Abolish?</div>
+      <p class="gc2-excerpt">The kafala system continues to bind millions of South Asian workers to employers with minimal legal protection. Is reform sufficient, or is a fundamental overhaul the only ethical path forward?</p>
+      <div class="gc2-author">
+        <div class="gc2-avatar">K</div>
+        <div class="gc2-author-info">
           <h4>Khalid Farooq</h4>
           <span>Geopolitical Researcher · Karachi</span>
         </div>
       </div>
-      <div class="guest-card-title">The Gulf's Labour Migration System: Reform or Abolish?</div>
-      <p class="guest-card-excerpt">The kafala system continues to bind millions of South Asian workers to employers with minimal legal protection. Is reform sufficient, or is a fundamental overhaul the only ethical path forward?</p>
-      <div class="guest-card-tag tag-realstory">Investigation · Human Rights</div>
     </a>
 
-    <a class="guest-card reveal reveal-delay-4" href="#">
-      <div class="guest-card-header">
-        <div class="guest-avatar">N</div>
-        <div class="guest-author-info">
+    <a class="gc2-card reveal reveal-delay-4" href="#">
+      <span class="gc2-quote">&ldquo;</span>
+      <div class="gc2-tag">Essay · Society</div>
+      <div class="gc2-title">Digital Childhood: Rethinking Our Relationship with Screens</div>
+      <p class="gc2-excerpt">As children spend more hours online than in classrooms, a growing body of research questions whether screen time has crossed from tool to harm — and what responsible parenting looks like in the algorithm age.</p>
+      <div class="gc2-author">
+        <div class="gc2-avatar">N</div>
+        <div class="gc2-author-info">
           <h4>Nadia Hussain</h4>
-          <span>Tech & Society Writer · Lahore</span>
+          <span>Tech &amp; Society Writer · Lahore</span>
         </div>
       </div>
-      <div class="guest-card-title">Digital Childhood: Rethinking Our Relationship with Screens</div>
-      <p class="guest-card-excerpt">As children spend more hours online than in classrooms, a growing body of research questions whether screen time has crossed the threshold from tool to harm — and what responsible parenting looks like in the algorithm age.</p>
-      <div class="guest-card-tag tag-parenting">Essay · Society</div>
     </a>
 
   </div>
@@ -2407,8 +3296,86 @@
   </div>
 </footer>
 
+<!-- ═══ COMING SOON TOAST ══════════════════════════════════ -->
+<div class="soon-toast" id="soonToast" role="status" aria-live="polite">
+  <span class="soon-toast-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+  </span>
+  <span><b>Coming Soon</b> — this story isn't live yet. Stay tuned!</span>
+</div>
+
 <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
 <script>
+  /* ── Theme system: Night (default) · Day ── */
+  const THEME_ICONS = {
+    // moon → shown when Night is active
+    night: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>',
+    // sun → shown when Day is active
+    day:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+  };
+
+  function applyTheme(mode) {
+    const m = (mode === 'day') ? 'day' : 'night';
+    if (m === 'day') document.documentElement.setAttribute('data-theme', 'day');
+    else document.documentElement.removeAttribute('data-theme'); // night = default :root
+    const icon = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+    if (icon) icon.innerHTML = THEME_ICONS[m];
+    if (label) label.textContent = (m === 'day') ? 'Day' : 'Night';
+    try { localStorage.setItem('ztcTheme', m); } catch (e) {}
+  }
+
+  function cycleTheme() {
+    const cur = (function(){ try { return localStorage.getItem('ztcTheme'); } catch(e){ return null; } })() || 'night';
+    applyTheme(cur === 'day' ? 'night' : 'day');
+  }
+
+  // apply saved theme as early as possible (default = night)
+  (function () {
+    let saved = 'night';
+    try { saved = localStorage.getItem('ztcTheme') || 'night'; } catch (e) {}
+    if (saved === 'day') document.documentElement.setAttribute('data-theme', 'day');
+    document.addEventListener('DOMContentLoaded', () => applyTheme(saved));
+  })();
+
+  /* ── Navbar: solid background after scrolling past the hero top ── */
+  (function () {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const onScroll = () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('DOMContentLoaded', onScroll);
+    onScroll();
+  })();
+
+  /* ── Coming Soon: intercept story links (no external navigation) ── */
+  (function () {
+    let toastTimer;
+    function showSoon() {
+      const t = document.getElementById('soonToast');
+      if (!t) return;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a');
+      if (!a) return;
+
+      const href = a.getAttribute('href') || '';
+      // allow pure in-page anchors (nav scroll) to work normally
+      const isInPageAnchor = href.startsWith('#') && href.length > 1;
+      if (isInPageAnchor) return;
+
+      // everything else (story links, '#', external) → Coming Soon
+      e.preventDefault();
+      showSoon();
+    }, true);
+  })();
+
   /* ── Intro animation: overlay remove after it finishes (har refresh par) ── */
   (function () {
     const intro = document.getElementById('ztc-intro');
@@ -2426,105 +3393,170 @@
     setTimeout(cleanup, 3200);
   })();
 
-  /* ── Hero Carousel ── */
-  const carousel = document.getElementById('heroCarousel');
-  const cards = document.querySelectorAll('.hc-card');
-  const dots = document.querySelectorAll('.dot');
-  const infoTag = document.querySelector('.hero-info-tag');
-  const infoTitle = document.querySelector('.hero-info-title');
-  const infoDesc = document.querySelector('.hero-info-desc');
-  const infoCta = document.querySelector('.hero-info-cta');
-  let centerIdx = 2;
-  let timer;
-
-  function updateInfo() {
-    const card = cards[centerIdx];
-    const tag = card.dataset.tag || '';
-    const title = card.dataset.title || '';
-    const desc = card.dataset.desc || '';
-    const href = card.href || '#';
-    infoTag.textContent = tag;
-    infoTitle.textContent = title;
-    infoDesc.textContent = desc;
-    infoCta.href = href;
-  }
-
-  function renderCarousel() {
-    cards.forEach((card, i) => {
-      card.className = 'hc-card';
-      const offset = (i - centerIdx + cards.length) % cards.length;
-      if (offset === 0) card.classList.add('hc-center');
-      else if (offset === 1) card.classList.add('hc-right');
-      else if (offset === 2) card.classList.add('hc-far-right');
-      else if (offset === cards.length - 2) card.classList.add('hc-left');
-      else if (offset === cards.length - 1) card.classList.add('hc-far-left');
-    });
-    dots.forEach((d, i) => d.classList.toggle('active', i === centerIdx));
-    updateInfo();
-  }
-
-  function goToSlide(n) {
-    centerIdx = (n + cards.length) % cards.length;
-    renderCarousel();
-    resetTimer();
-  }
-
-  function changeSlide(dir) { goToSlide(centerIdx + dir); }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => changeSlide(1), 5200);
-  }
-
-  cards.forEach((card, i) => {
-    card.addEventListener('click', (e) => {
-      if (i !== centerIdx) { e.preventDefault(); goToSlide(i); }
-    });
-  });
-
-  renderCarousel();
-  resetTimer();
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  changeSlide(-1);
-    if (e.key === 'ArrowRight') changeSlide(1);
-  });
-
-  /* ── Scroll Reveal (Figma-style fade-up, site-wide + auto-stagger) ── */
+  /* ── Hero: Al Jazeera style (lead rotates, synced with live feed) ── */
   (function () {
-    // Auto-apply reveal to common content elements (jin par pehle se nahi hai)
-    const autoSelectors = [
-      '.section-title', '.section-header', '.section-sub',
-      '.card', '.series-card', '.guest-card', '.trending-item', '.editorial-story',
-      '.editorial-left', '.about-text', '.about-visual',
-      'section > p', '.section-header + *'
-    ];
-    document.querySelectorAll(autoSelectors.join(',')).forEach(el => {
-      if (el.closest('#ztc-intro') || el.closest('nav')) return;
-      el.classList.add('reveal');
+    const root = document.getElementById('heroAJ');
+    if (!root) return;
+
+    let leads = [];
+    try { leads = JSON.parse(root.dataset.leads || '[]'); } catch (e) { leads = []; }
+    if (!leads.length) return;
+
+    const img     = document.getElementById('heroLeadImg');
+    const cat     = document.getElementById('heroLeadCat');
+    const title   = document.getElementById('heroLeadTitle');
+    const excerpt = document.getElementById('heroLeadExcerpt');
+    const link    = document.getElementById('heroLead');
+    const body    = link ? link.querySelector('.hero-lead-body') : null;
+    // only feed items that map to a lead (those with data-idx)
+    const feedItems = Array.from(document.querySelectorAll('.hero-feed-item[data-idx]'));
+
+    let current = 0;
+    let timer;
+
+    function render(idx) {
+      current = (idx + leads.length) % leads.length;
+      const s = leads[current];
+
+      // cross-fade image
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = s.img; img.style.opacity = '1'; }, 240);
+
+      // subtle text fade
+      if (body) {
+        body.style.opacity = '0';
+        body.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          cat.textContent     = s.cat;
+          title.textContent   = s.title;
+          excerpt.textContent = s.excerpt;
+          link.href           = s.href;
+          body.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+          body.style.opacity = '1';
+          body.style.transform = 'translateY(0)';
+        }, 180);
+      }
+
+      feedItems.forEach((f, i) => f.classList.toggle('is-active', i === current));
+    }
+
+    function next() { render(current + 1); }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, 6000);
+    }
+
+    function goTo(idx) { render(idx); resetTimer(); }
+
+    // hover a (mapped) feed item → show it as the lead
+    feedItems.forEach((f, i) => {
+      f.addEventListener('mouseenter', () => goTo(i));
     });
 
-    // Har section ke andar children ko stagger delay do (cascade effect)
-    document.querySelectorAll('section, footer').forEach(section => {
-      const items = section.querySelectorAll('.reveal');
-      items.forEach((el, i) => {
-        const hasDelay = [...el.classList].some(c => c.startsWith('reveal-delay-'));
-        if (!hasDelay) {
-          el.style.transitionDelay = Math.min(i * 0.06, 0.42) + 's';
-        }
+    // pause auto-rotate while interacting with the lead area
+    root.addEventListener('mouseenter', () => clearInterval(timer));
+    root.addEventListener('mouseleave', resetTimer);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    render(0);
+    resetTimer();
+  })();
+
+  /* ── Professional scroll reveal — site-wide, staggered, directional ── */
+  (function () {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Section headings → simple fade-up
+    document.querySelectorAll('.sec-head, .section-header').forEach(el => {
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    });
+
+    // Content groups → each child reveals with a stagger and a tasteful variant
+    const groups = [
+      { sel: '.hero-secondary', child: '.hero-sec-card', variant: '' },
+      { sel: '.tr2-grid',       child: '.tr2-lead, .tr2-item', variant: '' },
+      { sel: '.tr2-list',       child: '.tr2-item', variant: 'reveal-left' },
+      { sel: '.series-grid',    child: '.series-card', variant: 'reveal-scale' },
+      { sel: '.ed2-grid',       child: '.ed2-lead', variant: '' },
+      { sel: '.ed2-list',       child: '.ed2-item', variant: 'reveal-left' },
+      { sel: '.cat-layout',     child: '.cat-feature, .cat-item', variant: '' },
+      { sel: '.cat-list',       child: '.cat-item', variant: 'reveal-left' },
+      { sel: '.gc2-grid',       child: '.gc2-card', variant: 'reveal-scale' },
+      { sel: '.guest-grid',     child: '.guest-card', variant: 'reveal-scale' },
+      { sel: '.about-grid',     child: '.about-visual, .about-text', variant: '' }
+    ];
+    groups.forEach(g => {
+      document.querySelectorAll(g.sel).forEach(group => {
+        const kids = group.querySelectorAll(g.child);
+        kids.forEach((el, i) => {
+          if (el.closest('nav')) return;
+          el.classList.add('reveal');
+          if (g.variant) el.classList.add(g.variant);
+          if (![...el.classList].some(c => c.startsWith('reveal-delay-'))) {
+            el.style.transitionDelay = Math.min(i * 0.07, 0.42) + 's';
+          }
+        });
       });
     });
+
+    // Single standalone blocks
+    document.querySelectorAll('.about-text, .about-visual, section > p').forEach(el => {
+      if (el.closest('nav') || el.closest('#ztc-intro')) return;
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    });
+
+    const all = document.querySelectorAll('.reveal');
+
+    // Reduced motion OR no IntersectionObserver support → show everything immediately
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      all.forEach(el => el.classList.add('visible'));
+      return;
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // ek baar reveal, phir tik jaye
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    all.forEach(el => observer.observe(el));
+
+    // Anything already in view on load → reveal right away (no waiting for scroll)
+    requestAnimationFrame(() => {
+      all.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+      });
+    });
+
+    // Hard failsafe: never leave content hidden, even if the observer misbehaves
+    setTimeout(() => { all.forEach(el => el.classList.add('visible')); }, 2500);
+  })();
+
+  /* ── Scroll progress bar (top of page) ── */
+  (function () {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    let ticking = false;
+    function update() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
   })();
 
   /* ── Smooth scrolling behaviour ── */
