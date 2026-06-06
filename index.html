@@ -2294,13 +2294,28 @@
     @media (max-width: 768px) {
       :root { --section-h-pad: 24px; }
       section { padding: 56px var(--section-h-pad); }
-      nav { padding: 0 var(--section-h-pad); grid-template-columns: auto 1fr auto; grid-template-rows: 65px; height: 65px; }
-      .nav-links { overflow-x: auto; max-width: 100%; justify-self: stretch; }
-      .nav-links a { padding: 6px 10px; font-size: 0.68rem; white-space: nowrap; }
-      .nav-search { width: 180px; height: 36px; }
-      .auth-btn { width: 36px; height: 36px; }
-      .nav-search input { width: 100%; min-width: 0; }
-      .theme-toggle { height: 36px; padding: 0 10px; gap: 0; }
+      /* Single clean row: logo · search · theme · auth (evenly spaced) */
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 var(--section-h-pad);
+        height: 65px;
+      }
+      .nav-logo { flex-shrink: 0; }
+      .nav-logo img { height: 78px; width: 78px; }
+      .nav-links { display: none; }          /* categories live in the page; keep the bar clean on phones */
+      .nav-search {
+        flex: 1 1 auto;
+        width: auto; min-width: 0;
+        max-width: none;
+        height: 40px;
+        padding: 0 14px;
+      }
+      .nav-search input { width: 100%; min-width: 0; font-size: 0.82rem; }
+      .nav-right { gap: 10px; flex-shrink: 0; }
+      .auth-btn { width: 40px; height: 40px; }
+      .theme-toggle { width: 40px; height: 40px; padding: 0; justify-content: center; gap: 0; }
       .theme-toggle-label { display: none; }
       .slider { min-height: auto; padding-top: calc(65px + 24px); padding-bottom: 40px; }
       .hero-lead-title { font-size: clamp(1.45rem, 6vw, 1.95rem); }
